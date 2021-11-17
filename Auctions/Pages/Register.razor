@@ -1,0 +1,25 @@
+﻿@page "/register"    
+@using Domain.Repository
+@using Model.Entity
+@inject IUserRepository _repository
+@inject NavigationManager _navigationManager
+
+<EditForm Model="User" OnValidSubmit="Create">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText @bind-Value="User.Username" placeholder="Username" /> <br />
+    <InputText @bind-Value="User.Email" placeholder="Email" /> <br />
+    <InputText @bind-Value="User.Password" placeholder="Password" /> <br />
+
+    <button>register</button>
+</EditForm>
+
+@code{
+    public User User { get; set; } = new User();
+
+    private async void Create(){
+        await _repository.CreateAsync(User);
+        _navigationManager.NavigateTo("/");
+    }
+}
