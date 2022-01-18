@@ -1,0 +1,17 @@
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Service.deps.json
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Service.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\ref\Service.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Service.pdb
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Domain.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Model.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Domain.pdb
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\bin\Debug\net6.0\Model.pdb
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.AssemblyInfo.cs
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.csproj.CopyComplete
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\ref\Service.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Service\obj\Debug\net6.0\Service.pdb

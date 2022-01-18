@@ -23,6 +23,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXVjdGlvbnNMaXN0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Admin/Documents/Files/Schule/5AHIT/ITP/Auctions/Auctions/Pages/Authentication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Admin/Documents/Files/Schule/5AHIT/ITP/Auctions/Auctions/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -31,8 +35,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Documents/Files/Schule/5AHIT/ITP/Auctions/Auctions/Pages/Register.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIucmF6b3I=
+[C:/Users/Admin/Documents/Files/Schule/5AHIT/ITP/Auctions/Auctions/Pages/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Admin/Documents/Files/Schule/5AHIT/ITP/Auctions/Auctions/Shared/FooterMenu.razor]

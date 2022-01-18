@@ -1,7 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
+@using Model.Entity
+@using Services
+@inject AuthenticationStateProvider AuthProvider
+
 <PageTitle>Auctions</PageTitle>
 
+<CascadingValue Value="Account" IsFixed=true>
     <NavMenu />
 
     <main>
@@ -9,3 +14,9 @@
     </main>
 
     <FooterMenu />
+</CascadingValue>
+
+@code {
+    IAuthService Auth { get => ((IAuthService)AuthProvider); }
+    User Account { get => Auth.GetAccount() ?? new User(); }
+}
