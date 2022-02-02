@@ -14,7 +14,7 @@ namespace Model.Entity {
         public string Description { get; set; }
 
         [Required]
-        [ForeignColumn(ForeignType.MANY_TO_ONE, "SELLER_ID")]
+        [ForeignColumn(EForeignType.MANY_TO_ONE, "SELLER_ID")]
         public User Seller { get; set; }
 
         [Required]
@@ -23,14 +23,16 @@ namespace Model.Entity {
         [Required]
         public DateTime EndDate { get; set; }
 
-        [Decimal(10,2)]
+        [Number(10,2)]
         public decimal? FinalPrice { get; set; }
 
-        [ForeignColumn(ForeignType.MANY_TO_ONE, "BUYER_ID")]
+        [ForeignColumn(EForeignType.MANY_TO_ONE, "BUYER_ID")]
         public User? Buyer { get; set; }
 
-        public ICollection<AuctionImage> Images { get; set; }
+        [ReferenceColumn("Auction")]
+        public ICollection<AuctionImage>? Images { get; set; }
 
-        public ICollection<AuctionCategorie> Categories { get; set; }
+        [ReferenceColumn("Auction")]
+        public ICollection<AuctionCategorie>? Categories { get; set; }
     }
 }

@@ -1,9 +1,8 @@
-using Blazored.LocalStorage;
 using Domain.Repository;
-using Microsoft.AspNetCore.Components.Authorization;
+using EFCAT.Service.Authentication;
+using EFCAT.Service.Storage;
 using Microsoft.EntityFrameworkCore;
 using Model.Configuration;
-using Model.Entity;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,9 +19,12 @@ builder.Services.AddDbContext<AuctionDbContext>(
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddSingleton(builder.Configuration.GetSection("MailConnection").GetSection("DefaultMail").Get<MailSettings>());
+builder.Services.AddScoped<IMailService, MailService>();
+
+builder.Services.AddLocalStorage();
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationService>();
+builder.Services.AddAuthenticationService<AuctionAuthentication>();
 
 
 var app = builder.Build();

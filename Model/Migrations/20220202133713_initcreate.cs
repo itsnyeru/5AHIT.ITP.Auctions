@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Model.Migrations
 {
-    public partial class init : Migration
+    public partial class initcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,7 +36,7 @@ namespace Model.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     EMAIL = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
+                    PASSWORD = table.Column<string>(type: "varchar(256)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FIRST_NAME = table.Column<string>(type: "varchar(32)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -44,11 +44,11 @@ namespace Model.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PHONE_NUMBER = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BALANCE = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    BALANCE = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     IMAGE_CONTENT = table.Column<byte[]>(type: "longblob", nullable: true),
                     IMAGE_TYPE = table.Column<string>(type: "varchar(32)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    IS_ADMIN = table.Column<ulong>(type: "bit", nullable: false)
+                    IS_ADMIN = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,10 +69,8 @@ namespace Model.Migrations
                     SELLER_ID = table.Column<int>(type: "int", nullable: false),
                     START_DATE = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     END_DATE = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    FinalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    BUYER_ID = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    UserId1 = table.Column<int>(type: "int", nullable: true)
+                    FINAL_PRICE = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
+                    BUYER_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -89,16 +87,30 @@ namespace Model.Migrations
                         principalTable: "USERS",
                         principalColumn: "USER_ID",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "USER_HAS_CODES",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    USER_ID = table.Column<int>(type: "int", nullable: true),
+                    VALUE = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EXPIRES_AT = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    DISCRIMINATOR = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_USER_HAS_CODES", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_AUCTIONS_BT_USERS_UserId",
-                        column: x => x.UserId,
+                        name: "FK_USER_HAS_CODES_USERS_USER_ID",
+                        column: x => x.USER_ID,
                         principalTable: "USERS",
-                        principalColumn: "USER_ID");
-                    table.ForeignKey(
-                        name: "FK_AUCTIONS_BT_USERS_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "USERS",
-                        principalColumn: "USER_ID");
+                        principalColumn: "USER_ID",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -137,13 +149,11 @@ namespace Model.Migrations
                     AUCTION_ID = table.Column<int>(type: "int", nullable: true),
                     IMAGE_CONTENT = table.Column<byte[]>(type: "longblob", nullable: false),
                     IMAGE_TYPE = table.Column<string>(type: "varchar(32)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TempId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AUCTION_IMAGES", x => x.IMAGE_ID);
-                    table.UniqueConstraint("AK_AUCTION_IMAGES_TempId", x => x.TempId);
                     table.ForeignKey(
                         name: "FK_AUCTION_IMAGES_AUCTIONS_BT_AUCTION_ID",
                         column: x => x.AUCTION_ID,
@@ -158,9 +168,9 @@ namespace Model.Migrations
                 columns: table => new
                 {
                     AUCTION_ID = table.Column<int>(type: "int", nullable: false),
-                    STARTING_PRICE = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
-                    Step = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    InstantBuyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: true)
+                    STARTING_PRICE = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    STEP = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
+                    INSTANT_BUY_PRICE = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -179,7 +189,7 @@ namespace Model.Migrations
                 columns: table => new
                 {
                     AUCTION_ID = table.Column<int>(type: "int", nullable: false),
-                    MINIMUM_PRICE = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                    MINIMUM_PRICE = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,7 +208,7 @@ namespace Model.Migrations
                 columns: table => new
                 {
                     AUCTION_ID = table.Column<int>(type: "int", nullable: false),
-                    PRICE = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    PRICE = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     BID_DATE = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BIDDER_ID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -241,19 +251,26 @@ namespace Model.Migrations
                 column: "SELLER_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AUCTIONS_BT_UserId",
-                table: "AUCTIONS_BT",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AUCTIONS_BT_UserId1",
-                table: "AUCTIONS_BT",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BIDDING_AUCTION_BIDS_BIDDER_ID",
                 table: "BIDDING_AUCTION_BIDS",
                 column: "BIDDER_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_USER_HAS_CODES_USER_ID",
+                table: "USER_HAS_CODES",
+                column: "USER_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_USERS_EMAIL",
+                table: "USERS",
+                column: "EMAIL",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_USERS_USERNAME",
+                table: "USERS",
+                column: "USERNAME",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -269,6 +286,9 @@ namespace Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "BUY_AUCTION");
+
+            migrationBuilder.DropTable(
+                name: "USER_HAS_CODES");
 
             migrationBuilder.DropTable(
                 name: "CATEGORIES");

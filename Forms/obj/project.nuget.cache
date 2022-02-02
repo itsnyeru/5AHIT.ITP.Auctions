@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RP0FsP/re1ZPxcK/ISG9f2MqF1eGl3wt6oPJSmrBwrKc1FV0JmfBgyVgK8xFyVvuZAFnq5nytsfchSSz6ravPg==",
+  "dgSpecHash": "Ddkivk8oLxQS5HLDROwlGR1sdeYb9ZRzMafEE0udiNoRXlsYq8NDJwR/oom+cB65Hbo3ZfrefEdwdlYrqUi6WA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Forms\\Forms.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\efcat.model.data\\1.1.4\\efcat.model.data.1.1.4.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

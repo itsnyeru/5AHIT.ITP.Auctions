@@ -1,23 +1,13 @@
-﻿using EFCAT.Repository;
+﻿using EFCAT.Domain.Repository;
 using Model.Configuration;
 using Model.Entity;
 
-namespace Domain.Repository {
-    public interface IUserRepository : IRepositoryAsync<User, int> {
-        Task<User?> GetAccount(int id);
-        Task<User?> GetAccount(string identifier, string password);
-    }
+namespace Domain.Repository;
 
-    public class UserRepository : ARepositoryAsync<User, int>, IUserRepository {
-        public UserRepository(AuctionDbContext context) : base(context) {  }
+public interface IUserRepository : IRepositoryAsync<User> {
 
-        public async Task<User?> GetAccount(int id) => await _entitySet.FindAsync(id);
+}
 
-        /* Returns a User after  */
-        public async Task<User?> GetAccount(string identifier, string password) {
-            var user = _entitySet.SingleOrDefault(u => u.Email == identifier || u.Username == identifier);
-            if (user == null) return await Task.FromResult(user);
-            return await Task.FromResult(user.Password.Verify(password) ? user : null);
-        }
-    }
+public class UserRepository : ARepositoryAsync<User>, IUserRepository {
+    public UserRepository(AuctionDbContext context) : base(context) { }
 }

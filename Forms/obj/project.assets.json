@@ -1,11 +1,76 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "EFCAT.Model.Data/1.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/EFCAT.Model.Data.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/EFCAT.Model.Data.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "EFCAT.Model.Data/1.1.4": {
+      "sha512": "PhN56OAKJa7QbwcbGIF3V1a6ZY9zoKBWiKght5BXgFO/mGCj/OueskxKetJ11QmEt+72lYIHjgqrxYLLcE/rDQ==",
+      "type": "package",
+      "path": "efcat.model.data/1.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "efcat.model.data.1.1.4.nupkg.sha512",
+        "efcat.model.data.nuspec",
+        "icon.png",
+        "lib/net6.0/EFCAT.Model.Data.dll"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "EFCAT.Model.Data >= 1.1.4"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Admin\\.nuget\\packages\\": {},
@@ -51,6 +116,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "EFCAT.Model.Data": {
+            "target": "Package",
+            "version": "[1.1.4, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

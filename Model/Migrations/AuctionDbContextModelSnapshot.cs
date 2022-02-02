@@ -39,7 +39,10 @@ namespace Model.Migrations
                         .HasColumnName("END_DATE");
 
                     b.Property<decimal?>("FinalPrice")
-                        .HasColumnType("decimal(65,30)");
+                        .IsRequired()
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)")
+                        .HasColumnName("FINAL_PRICE");
 
                     b.Property<int>("SELLER_ID")
                         .HasColumnType("int");
@@ -53,23 +56,13 @@ namespace Model.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("TITLE");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BUYER_ID");
 
                     b.HasIndex("SELLER_ID");
 
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("AUCTIONS_BT");
+                    b.ToTable("AUCTIONS_BT", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.AuctionCategorie", b =>
@@ -84,7 +77,7 @@ namespace Model.Migrations
 
                     b.HasIndex("AUCTION_ID");
 
-                    b.ToTable("AUCTION_HAS_CATEGORIES");
+                    b.ToTable("AUCTION_HAS_CATEGORIES", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.AuctionImage", b =>
@@ -97,16 +90,11 @@ namespace Model.Migrations
                     b.Property<int?>("AUCTION_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("TempId")
-                        .HasColumnType("int");
-
                     b.HasKey("ImageId");
-
-                    b.HasAlternateKey("TempId");
 
                     b.HasIndex("AUCTION_ID");
 
-                    b.ToTable("AUCTION_IMAGES");
+                    b.ToTable("AUCTION_IMAGES", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.BiddingAuctionBid", b =>
@@ -122,6 +110,7 @@ namespace Model.Migrations
                         .HasColumnName("BID_DATE");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("PRICE");
 
@@ -129,7 +118,7 @@ namespace Model.Migrations
 
                     b.HasIndex("BIDDER_ID");
 
-                    b.ToTable("BIDDING_AUCTION_BIDS");
+                    b.ToTable("BIDDING_AUCTION_BIDS", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.Categorie", b =>
@@ -140,7 +129,38 @@ namespace Model.Migrations
 
                     b.HasKey("Label");
 
-                    b.ToTable("CATEGORIES");
+                    b.ToTable("CATEGORIES", (string)null);
+                });
+
+            modelBuilder.Entity("Model.Entity.Code", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasColumnName("ID");
+
+                    b.Property<string>("DISCRIMINATOR")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("EXPIRES_AT");
+
+                    b.Property<int?>("USER_ID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext")
+                        .HasColumnName("VALUE");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("USER_ID");
+
+                    b.ToTable("USER_HAS_CODES", (string)null);
+
+                    b.HasDiscriminator<string>("DISCRIMINATOR").HasValue("Code");
                 });
 
             modelBuilder.Entity("Model.Entity.User", b =>
@@ -151,6 +171,7 @@ namespace Model.Migrations
                         .HasColumnName("USER_ID");
 
                     b.Property<decimal>("Balance")
+                        .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("BALANCE");
 
@@ -163,8 +184,8 @@ namespace Model.Migrations
                         .HasColumnType("varchar(32)")
                         .HasColumnName("FIRST_NAME");
 
-                    b.Property<ulong>("IsAdmin")
-                        .HasColumnType("bit")
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("IS_ADMIN");
 
                     b.Property<string>("LastName")
@@ -173,8 +194,8 @@ namespace Model.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("PASSWORD");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext")
@@ -187,7 +208,13 @@ namespace Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("USERS");
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("USERS", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.BiddingAuction", b =>
@@ -195,16 +222,23 @@ namespace Model.Migrations
                     b.HasBaseType("Model.Entity.Auction");
 
                     b.Property<decimal?>("InstantBuyPrice")
-                        .HasColumnType("decimal(65,30)");
+                        .IsRequired()
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)")
+                        .HasColumnName("INSTANT_BUY_PRICE");
 
                     b.Property<decimal>("StartingPrice")
+                        .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("STARTING_PRICE");
 
                     b.Property<decimal?>("Step")
-                        .HasColumnType("decimal(65,30)");
+                        .IsRequired()
+                        .HasPrecision(12, 2)
+                        .HasColumnType("decimal(12,2)")
+                        .HasColumnName("STEP");
 
-                    b.ToTable("BIDDING_AUCTION");
+                    b.ToTable("BIDDING_AUCTION", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.BuyAuction", b =>
@@ -212,32 +246,39 @@ namespace Model.Migrations
                     b.HasBaseType("Model.Entity.Auction");
 
                     b.Property<decimal>("MinimumPrice")
+                        .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("MINIMUM_PRICE");
 
-                    b.ToTable("BUY_AUCTION");
+                    b.ToTable("BUY_AUCTION", (string)null);
+                });
+
+            modelBuilder.Entity("Model.Entity.EmailVerificationCode", b =>
+                {
+                    b.HasBaseType("Model.Entity.Code");
+
+                    b.HasDiscriminator().HasValue("EMAIL_VERIFICATION");
+                });
+
+            modelBuilder.Entity("Model.Entity.PasswordResetCode", b =>
+                {
+                    b.HasBaseType("Model.Entity.Code");
+
+                    b.HasDiscriminator().HasValue("PASSWORD_RESET");
                 });
 
             modelBuilder.Entity("Model.Entity.Auction", b =>
                 {
                     b.HasOne("Model.Entity.User", "Buyer")
-                        .WithMany()
+                        .WithMany("Buys")
                         .HasForeignKey("BUYER_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Model.Entity.User", "Seller")
-                        .WithMany()
+                        .WithMany("Sells")
                         .HasForeignKey("SELLER_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Model.Entity.User", null)
-                        .WithMany("Sells")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("Model.Entity.User", null)
-                        .WithMany("Buys")
-                        .HasForeignKey("UserId1");
 
                     b.Navigation("Buyer");
 
@@ -270,7 +311,7 @@ namespace Model.Migrations
                         .HasForeignKey("AUCTION_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.OwnsOne("EFCAT.Model.Annotation.Image", "Image", b1 =>
+                    b.OwnsOne("EFCAT.Model.Data.Image", "Image", b1 =>
                         {
                             b1.Property<int>("AuctionImageImageId")
                                 .HasColumnType("int");
@@ -308,7 +349,7 @@ namespace Model.Migrations
                         .IsRequired();
 
                     b.HasOne("Model.Entity.User", "Bidder")
-                        .WithMany()
+                        .WithMany("Bids")
                         .HasForeignKey("BIDDER_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -318,9 +359,19 @@ namespace Model.Migrations
                     b.Navigation("Bidder");
                 });
 
+            modelBuilder.Entity("Model.Entity.Code", b =>
+                {
+                    b.HasOne("Model.Entity.User", "User")
+                        .WithMany("Codes")
+                        .HasForeignKey("USER_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Model.Entity.User", b =>
                 {
-                    b.OwnsOne("EFCAT.Model.Annotation.Image", "Image", b1 =>
+                    b.OwnsOne("EFCAT.Model.Data.Image", "Image", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -378,7 +429,11 @@ namespace Model.Migrations
 
             modelBuilder.Entity("Model.Entity.User", b =>
                 {
+                    b.Navigation("Bids");
+
                     b.Navigation("Buys");
+
+                    b.Navigation("Codes");
 
                     b.Navigation("Sells");
                 });

@@ -12,8 +12,11 @@ namespace Model.Configuration {
         public DbSet<BuyAuction> BuyAuction { get; set; }
         public DbSet<Categorie> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Code> Codes { get; set; }
+        public DbSet<EmailVerificationCode> EmailVerificationCodes { get; set; }
+        public DbSet<PasswordResetCode> PasswordResetCodes { get; set; }
 
-        public AuctionDbContext(DbContextOptions<AuctionDbContext> options) : base(options) { }
+        public AuctionDbContext(DbContextOptions<AuctionDbContext> options) : base(options, true) { }
 
     }
 }

@@ -2,10 +2,10 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "EFCAT.Model/1.0.4": {
+      "EFCAT.Model/1.1.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Components.Web": "6.0.1",
+          "EFCAT.Model.Data": "1.1.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0"
         },
         "compile": {
@@ -15,6 +15,18 @@
           "lib/net6.0/EFCAT.Model.dll": {}
         }
       },
+      "EFCAT.Model.Data/1.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/EFCAT.Model.Data.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/EFCAT.Model.Data.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -22,76 +34,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Authorization/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Metadata": "6.0.1",
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Options": "6.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Authorization.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Components/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Authorization": "6.0.1",
-          "Microsoft.AspNetCore.Components.Analyzers": "6.0.1"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Components.Analyzers/6.0.1": {
-        "type": "package",
-        "build": {
-          "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets": {}
-        }
-      },
-      "Microsoft.AspNetCore.Components.Forms/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Components": "6.0.1"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.Forms.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.Forms.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Components.Web/6.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Components": "6.0.1",
-          "Microsoft.AspNetCore.Components.Forms": "6.0.1",
-          "Microsoft.Extensions.DependencyInjection": "6.0.0",
-          "Microsoft.JSInterop": "6.0.1",
-          "System.IO.Pipelines": "6.0.1"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.Web.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Components.Web.dll": {}
-        }
-      },
-      "Microsoft.AspNetCore.Metadata/6.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.AspNetCore.Metadata.dll": {}
         }
       },
       "Microsoft.CSharp/4.5.0": {
@@ -439,15 +381,6 @@
           "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll": {}
         }
       },
-      "Microsoft.JSInterop/6.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/Microsoft.JSInterop.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.JSInterop.dll": {}
-        }
-      },
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -505,6 +438,15 @@
         },
         "runtime": {
           "lib/net6.0/MySqlConnector.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
       "Pomelo.EntityFrameworkCore.MySql/6.0.0": {
@@ -598,18 +540,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll": {}
-        }
-      },
-      "System.IO.Pipelines/6.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/System.IO.Pipelines.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/System.IO.Pipelines.dll": {}
-        },
-        "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "System.Runtime.Caching/4.7.0": {
@@ -762,17 +692,30 @@
     }
   },
   "libraries": {
-    "EFCAT.Model/1.0.4": {
-      "sha512": "69DGAO2/ud//lvj+AppX6w9zVCoMwEYNvLOYGe4y0MzufQbAzPGuvhTQ6c9DTfdGNy5XgnqnqIaoK3zzBzA4Jw==",
+    "EFCAT.Model/1.1.4": {
+      "sha512": "XtRL6S16+elvKraStQDmvQ5eqnIXh1wuzYCNr6OMxjUzg4hs31xXXh2EO/JyXKk7vA38zBL/X4NzJLcj18rnHw==",
       "type": "package",
-      "path": "efcat.model/1.0.4",
+      "path": "efcat.model/1.1.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "efcat.model.1.0.4.nupkg.sha512",
+        "efcat.model.1.1.4.nupkg.sha512",
         "efcat.model.nuspec",
         "icon.png",
         "lib/net6.0/EFCAT.Model.dll"
+      ]
+    },
+    "EFCAT.Model.Data/1.1.4": {
+      "sha512": "PhN56OAKJa7QbwcbGIF3V1a6ZY9zoKBWiKght5BXgFO/mGCj/OueskxKetJ11QmEt+72lYIHjgqrxYLLcE/rDQ==",
+      "type": "package",
+      "path": "efcat.model.data/1.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "efcat.model.data.1.1.4.nupkg.sha512",
+        "efcat.model.data.nuspec",
+        "icon.png",
+        "lib/net6.0/EFCAT.Model.Data.dll"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -789,105 +732,6 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
-      ]
-    },
-    "Microsoft.AspNetCore.Authorization/6.0.1": {
-      "sha512": "4XjeiDdQPmC5eNMFGM9LEcQUxORz6NpUsYD1AmZuk8GBA8IW8kN+o7M7m+rhhrYIWxQ9TADePaMWeomScGhbCQ==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.authorization/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.AspNetCore.Authorization.dll",
-        "lib/net461/Microsoft.AspNetCore.Authorization.xml",
-        "lib/net6.0/Microsoft.AspNetCore.Authorization.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Authorization.xml",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.xml",
-        "microsoft.aspnetcore.authorization.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.authorization.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Components/6.0.1": {
-      "sha512": "q2WwEpmuT6tDAURCTo/q0ToWcate6XIGQ3+Yvc/utGFpyAOXynK9OdB+bCHB3BLrMAG/3U9dTt+K7v8ReQ3FKA==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.components/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.txt",
-        "lib/net6.0/Microsoft.AspNetCore.Components.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Components.xml",
-        "microsoft.aspnetcore.components.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.components.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Components.Analyzers/6.0.1": {
-      "sha512": "5FWCCBrxeY8HGiPULYpqlwCX8TAs3H1p7mVdfymGF/0ak7vY2qbMMxOXMZaqp/V5C9FcnU33+z4h1wNMXVH7PQ==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.components.analyzers/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.txt",
-        "analyzers/dotnet/cs/Microsoft.AspNetCore.Components.Analyzers.dll",
-        "build/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets",
-        "buildTransitive/netstandard2.0/Microsoft.AspNetCore.Components.Analyzers.targets",
-        "microsoft.aspnetcore.components.analyzers.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.components.analyzers.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Components.Forms/6.0.1": {
-      "sha512": "uXGsVTnyEuj4C8c4M8Kuq5i1CNAAd1C7P0XhBsauJ0aocSq1xUJ9qL6XLZFA7NZUwDvdlPUC+s456eEcbdCIig==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.components.forms/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.txt",
-        "lib/net6.0/Microsoft.AspNetCore.Components.Forms.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Components.Forms.xml",
-        "microsoft.aspnetcore.components.forms.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.components.forms.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Components.Web/6.0.1": {
-      "sha512": "OhaK9izLH6Jjc1xJ+L0UEhuUcj12iQ80DDsIs/x9rwYyb3fhnttbu5zYQfA75SDlJbURXMt8IyMh1gY5fD2MLw==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.components.web/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.txt",
-        "lib/net6.0/Microsoft.AspNetCore.Components.Web.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Components.Web.xml",
-        "microsoft.aspnetcore.components.web.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.components.web.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Metadata/6.0.1": {
-      "sha512": "7CquMq2Hb0+0/kKnDf83WBLiEh04UPIOZgxgpjF0NegU1gHZ50llgZupOE3FRARmdzzW7A0AJtt9zobKbMTJkA==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.metadata/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/Microsoft.AspNetCore.Metadata.dll",
-        "lib/net461/Microsoft.AspNetCore.Metadata.xml",
-        "lib/net6.0/Microsoft.AspNetCore.Metadata.dll",
-        "lib/net6.0/Microsoft.AspNetCore.Metadata.xml",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.xml",
-        "microsoft.aspnetcore.metadata.6.0.1.nupkg.sha512",
-        "microsoft.aspnetcore.metadata.nuspec"
       ]
     },
     "Microsoft.CSharp/4.5.0": {
@@ -1513,21 +1357,6 @@
         "microsoft.identitymodel.tokens.nuspec"
       ]
     },
-    "Microsoft.JSInterop/6.0.1": {
-      "sha512": "MJ3GtQiAMuu7JtgjlaPxeP5/P2h0hOlYaGhCvsUOyA645+nOnWGSnsNJ4ktCIjQYErOYPDJuV8dHTK7bysI8aQ==",
-      "type": "package",
-      "path": "microsoft.jsinterop/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net6.0/Microsoft.JSInterop.dll",
-        "lib/net6.0/Microsoft.JSInterop.xml",
-        "microsoft.jsinterop.6.0.1.nupkg.sha512",
-        "microsoft.jsinterop.nuspec"
-      ]
-    },
     "Microsoft.NETCore.Platforms/3.1.0": {
       "sha512": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
       "type": "package",
@@ -1648,6 +1477,33 @@
         "logo.png",
         "mysqlconnector.2.0.0.nupkg.sha512",
         "mysqlconnector.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "Pomelo.EntityFrameworkCore.MySql/6.0.0": {
@@ -1789,31 +1645,6 @@
         "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.xml",
         "system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
         "system.identitymodel.tokens.jwt.nuspec"
-      ]
-    },
-    "System.IO.Pipelines/6.0.1": {
-      "sha512": "1j1pZX1ICzEyjafyssU3BzWVxUsaN3zq0wEmGKj3bxINC6NkmS30eEVuZ7k/QX2UKYNCaUch6g46taYKxcpFtw==",
-      "type": "package",
-      "path": "system.io.pipelines/6.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/netcoreapp2.0/System.IO.Pipelines.targets",
-        "buildTransitive/netcoreapp3.1/_._",
-        "lib/net461/System.IO.Pipelines.dll",
-        "lib/net461/System.IO.Pipelines.xml",
-        "lib/net6.0/System.IO.Pipelines.dll",
-        "lib/net6.0/System.IO.Pipelines.xml",
-        "lib/netcoreapp3.1/System.IO.Pipelines.dll",
-        "lib/netcoreapp3.1/System.IO.Pipelines.xml",
-        "lib/netstandard2.0/System.IO.Pipelines.dll",
-        "lib/netstandard2.0/System.IO.Pipelines.xml",
-        "system.io.pipelines.6.0.1.nupkg.sha512",
-        "system.io.pipelines.nuspec",
-        "useSharedDesignerContext.txt"
       ]
     },
     "System.Runtime.Caching/4.7.0": {
@@ -2176,7 +2007,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "EFCAT.Model >= 1.0.4",
+      "EFCAT.Model >= 1.1.4",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.0"
     ]
@@ -2228,7 +2059,7 @@
         "dependencies": {
           "EFCAT.Model": {
             "target": "Package",
-            "version": "[1.0.4, )"
+            "version": "[1.1.4, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

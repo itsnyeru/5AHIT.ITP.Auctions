@@ -58,9 +58,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Blazored.LocalStorage": {
+            "EFCAT.Service": {
               "target": "Package",
-              "version": "[4.1.5, )"
+              "version": "[1.1.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -140,9 +140,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "EFCAT": {
+            "EFCAT.Domain": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[1.1.4, )"
             }
           },
           "imports": [
@@ -204,6 +204,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "EFCAT.Model.Data": {
+              "target": "Package",
+              "version": "[1.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -266,7 +272,7 @@
           "dependencies": {
             "EFCAT.Model": {
               "target": "Package",
-              "version": "[1.0.4, )"
+              "version": "[1.1.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -346,13 +352,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Blazored.LocalStorage": {
+            "EFCAT.Service": {
               "target": "Package",
-              "version": "[4.1.5, )"
-            },
-            "Microsoft.AspNetCore.Components.Authorization": {
-              "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[1.1.4, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

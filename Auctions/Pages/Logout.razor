@@ -1,4 +1,6 @@
 ﻿@page "/logout"
+@using EFCAT.Service.Authentication
+@using Model.Entity
 @using Services
 @inject NavigationManager NavManager
 @inject AuthenticationStateProvider AuthProvider
@@ -8,7 +10,7 @@
 
 @code {
     protected override Task OnInitializedAsync() {
-        ((IAuthService)AuthProvider).Logout();
+        ((IAuthenticationService<User>)AuthProvider).Logout();
         NavManager.NavigateTo("/", forceLoad: true);
         return base.OnInitializedAsync();
     }

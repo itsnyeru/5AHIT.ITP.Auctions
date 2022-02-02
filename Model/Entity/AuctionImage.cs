@@ -6,7 +6,7 @@
         [Column("IMAGE_ID")]
         public int ImageId { get; set; }
 
-        [ForeignColumn(ForeignType.MANY_TO_ONE, "AUCTION_ID")]
+        [ForeignColumn(EForeignType.MANY_TO_ONE, "AUCTION_ID")]
         public Auction Auction { get; set; }
 
         public Image Image { get; set; }
