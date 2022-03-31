@@ -5,7 +5,6 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Auctions.deps.json
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Auctions.runtimeconfig.json
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Auctions.dll
-C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\ref\Auctions.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Auctions.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\EFCAT.Domain.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\EFCAT.Model.dll
@@ -77,8 +76,6 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\Auctions.RazorAssemblyInfo.cs
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
-C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\Shared\NavMenu.razor.rz.scp.css
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\bundle\Auctions.styles.css
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\projectbundle\Auctions.bundle.scp.css
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\Auctions.csproj.CopyComplete
@@ -86,3 +83,8 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\ref\Auctions.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\Auctions.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\Auctions.genruntimeconfig.cache
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\Components\NavMenu.razor.rz.scp.css
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\scopedcss\Layouts\MainLayout.razor.rz.scp.css
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Auctions\obj\Debug\net6.0\refint\Auctions.dll

@@ -30,9 +30,9 @@ namespace Model.Entity {
         public User? Buyer { get; set; }
 
         [ReferenceColumn("Auction")]
-        public ICollection<AuctionImage>? Images { get; set; }
+        public ICollection<AuctionImage> Images { get; set; }
 
         [ReferenceColumn("Auction")]
-        public ICollection<AuctionCategorie>? Categories { get; set; }
+        public ICollection<AuctionCategorie> Categories { get; set; }
     }
 }

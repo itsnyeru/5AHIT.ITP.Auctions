@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "MYO+9PAJZFbFWekttHQSxjFrFTElRObCBosez7NVkdTXGUPn89M+r6q9i4lGmsgcGTsp5OQFaR2h7M9Zwl/x4Q==",
+  "dgSpecHash": "50wWva3JhOhc6ZXGHi8bHVoqJbU2lf9UGAl9b4oE1GU7JxYn5uInTSmgfMGZOqFB0BNgmGgCJYT3iu4E+1rkzg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Model\\Model.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\efcat.model\\1.1.4\\efcat.model.1.1.4.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\efcat.model.data\\1.1.4\\efcat.model.data.1.1.4.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\efcat.model\\1.1.5\\efcat.model.1.1.5.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\efcat.model.data\\1.1.5\\efcat.model.data.1.1.5.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.1\\microsoft.aspnetcore.cryptography.internal.6.0.1.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.1\\microsoft.aspnetcore.cryptography.keyderivation.6.0.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

@@ -1,0 +1,23 @@
+@page "/emailverification/{Username}/{CodeId}"
+@inject ICodeRepository _codeRepository
+
+@if (valid == null) {
+    <h2>Loading...</h2>
+} else if ((bool)valid) {
+    <h2><b>@Username</b> got verified!</h2>
+} else {
+    <h2>Link is invalid!</h2>
+}
+
+@code {
+    [Parameter]
+    public string? Username { get; set; }
+    [Parameter]
+    public string? CodeId { get; set; }
+
+    bool? valid;
+
+    protected async override Task OnInitializedAsync() {
+        valid = await _codeRepository.VerifyEmail(Username, CodeId ?? "");
+    }
+}

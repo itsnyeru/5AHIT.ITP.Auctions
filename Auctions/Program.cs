@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AuctionDbContext>(
 );
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICodeRepository, CodeRepository>();
 
 builder.Services.AddSingleton(builder.Configuration.GetSection("MailConnection").GetSection("DefaultMail").Get<MailSettings>());
 builder.Services.AddScoped<IMailService, MailService>();
@@ -28,13 +29,6 @@ builder.Services.AddAuthenticationService<AuctionAuthentication>();
 
 
 var app = builder.Build();
-
-using (var context = app.Services.CreateScope().ServiceProvider.GetService<AuctionDbContext>()) {
-    if (context == null) return;
-    //context.Database.Migrate();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

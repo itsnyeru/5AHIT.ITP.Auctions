@@ -7,7 +7,11 @@
 @inject IUserRepository _repository
 @inject NavigationManager _navigationManager
 @inject AuthenticationStateProvider AuthProvider
+@inject ICodeRepository _codeRepository
+@inject IUserRepository _userRepository
+@inject IMailService _mailService;
 
+<!-- Login -->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content clearfix">
@@ -29,7 +33,8 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; ">
                         <div class="col">
-                            <a href="" class="forgot-pass">Forgot Password?</a>
+                            
+                            <a data-dismiss="modal" data-toggle="modal" class="forgot-pass" href="#myModal3">Forgot Password?</a>
                         </div>
                         <div class="col">
                             <a data-dismiss="modal" data-toggle="modal" class="forgot-pass" href="#myModal2">Need an account?</a>
@@ -44,7 +49,7 @@
 
 
 
-<!-- Modal -->
+<!-- Register -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content clearfix">
@@ -79,11 +84,35 @@
     </div>
 </div>
 
+<!-- Password Reset -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content clearfix">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div class="modal-body">
+                <EditForm Model="PasswordReset" OnValidSubmit="ExecutePasswordReset">
+                    <h3 class="title">Password Reset</h3>
+                    <p class="description">Reset your password. </p>
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group">
+                        <span class="input-icon"><i class="fa fa-user"></i></span>
+                        <input type="text" @bind-value="PasswordReset.Identity" class="form-control" placeholder="Type username or email...">
+                    </div>
+                    <a data-dismiss="modal" data-toggle="modal" href="#myModal1" class="forgot-pass pull-right">Remembered your password?</a>
+                    <button class="btn">Reset</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
 @code {
     IAuthenticationService<User> Auth;
 
-    public LoginForm Login { get; set; } = new LoginForm();
-    public RegisterForm Register { get; set; } = new RegisterForm();
+    LoginForm Login { get; set; } = new LoginForm();
+    RegisterForm Register { get; set; } = new RegisterForm();
+    PasswordResetForm PasswordReset { get; set; } = new PasswordResetForm();
 
     protected override Task OnInitializedAsync() {
         Login = new LoginForm();
@@ -100,19 +129,31 @@
         _navigationManager.NavigateTo("/", forceLoad: true);
     }
 
+    private async Task ExecutePasswordReset(EditContext context) {
+        User? user = await _userRepository.GetUserByIdentity(PasswordReset.Identity);
+        PasswordResetCode code = new PasswordResetCode() { User = user };
+        await _codeRepository.Create(code);
+        await _mailService.SendEmailAsync(user.Email, "Email Verification", $"https://localhost:7038/passwordreset/{user.Username}/{code.Id}");
+    }
+
     [Authentication("REGISTER", ErrorMessage = "Something went wrong. Please try again later.")]
-    public class RegisterForm : User {
+    private class RegisterForm : User {
         [Compare("Password", ErrorMessage = "No matching Passwords!")]
         [NotNull]
         public string RepeatPassword { get; set; }
     }
 
     [Authentication("LOGIN", ErrorMessage = "Identifier or Password incorrect.")]
-    public class LoginForm {
+    private class LoginForm {
         [Substitute("Username", "Email")]
         [NotNull]
         public string Identifier { get; set; }
         [NotNull]
         public string Password { get; set; }
+    }
+
+    private class PasswordResetForm {
+        [NotNull]
+        public string Identity { get; set; }
     }
 }

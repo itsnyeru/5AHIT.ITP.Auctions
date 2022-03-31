@@ -1,7 +1,6 @@
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\bin\Debug\net6.0\Model.deps.json
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\bin\Debug\net6.0\Model.runtimeconfig.json
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\bin\Debug\net6.0\Model.dll
-C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\bin\Debug\net6.0\ref\Model.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\bin\Debug\net6.0\Model.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\Model.csproj.AssemblyReference.cache
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\Model.GeneratedMSBuildEditorConfig.editorconfig
@@ -12,3 +11,4 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\ref\Model.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\Model.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\Model.genruntimeconfig.cache
+C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Model\obj\Debug\net6.0\refint\Model.dll

@@ -8,44 +8,64 @@
     ".NETCoreApp,Version=v6.0": {
       "Domain/1.0.0": {
         "dependencies": {
-          "EFCAT.Domain": "1.1.4",
+          "EFCAT.Domain": "1.1.5",
           "Model": "1.0.0"
         },
         "runtime": {
           "Domain.dll": {}
         }
       },
-      "EFCAT.Domain/1.1.4": {
+      "EFCAT.Domain/1.1.5": {
         "dependencies": {
-          "EFCAT.Model": "1.1.4"
+          "EFCAT.Model": "1.1.5"
         },
         "runtime": {
           "lib/net6.0/EFCAT.Domain.dll": {
-            "assemblyVersion": "1.1.4.0",
-            "fileVersion": "1.1.4.0"
+            "assemblyVersion": "1.1.5.0",
+            "fileVersion": "1.1.5.0"
           }
         }
       },
-      "EFCAT.Model/1.1.4": {
+      "EFCAT.Model/1.1.5": {
         "dependencies": {
-          "EFCAT.Model.Data": "1.1.4",
+          "EFCAT.Model.Data": "1.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0"
         },
         "runtime": {
           "lib/net6.0/EFCAT.Model.dll": {
-            "assemblyVersion": "1.1.4.0",
-            "fileVersion": "1.1.4.0"
+            "assemblyVersion": "1.1.5.0",
+            "fileVersion": "1.1.5.0"
           }
         }
       },
-      "EFCAT.Model.Data/1.1.4": {
+      "EFCAT.Model.Data/1.1.5": {
         "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "6.0.1",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0/EFCAT.Model.Data.dll": {
-            "assemblyVersion": "1.1.4.0",
-            "fileVersion": "1.1.4.0"
+            "assemblyVersion": "1.1.5.0",
+            "fileVersion": "1.1.5.0"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.Internal/6.0.1": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.121.56714"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/6.0.1": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "6.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.121.56714"
           }
         }
       },
@@ -522,7 +542,7 @@
       },
       "Model/1.0.0": {
         "dependencies": {
-          "EFCAT.Model": "1.1.4",
+          "EFCAT.Model": "1.1.5",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.0"
         },
         "runtime": {
@@ -537,26 +557,40 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EFCAT.Domain/1.1.4": {
+    "EFCAT.Domain/1.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lKYcUWNdvMRqj3oglL9o41MXGiXqFRUbfZRSGYRSw3tRAdl61ICgCsw7l8xJ2PBQTvS59xhU5QiBNsUqUGU4ew==",
-      "path": "efcat.domain/1.1.4",
-      "hashPath": "efcat.domain.1.1.4.nupkg.sha512"
+      "sha512": "sha512-wecksntGJRw5uCXusO07ukPJW6o8R+65vqMD/YmcNVX6KfspxskEP+Tuk0Nn+Kfzpxdn2vYwVIyeWkLcUO+lCw==",
+      "path": "efcat.domain/1.1.5",
+      "hashPath": "efcat.domain.1.1.5.nupkg.sha512"
     },
-    "EFCAT.Model/1.1.4": {
+    "EFCAT.Model/1.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XtRL6S16+elvKraStQDmvQ5eqnIXh1wuzYCNr6OMxjUzg4hs31xXXh2EO/JyXKk7vA38zBL/X4NzJLcj18rnHw==",
-      "path": "efcat.model/1.1.4",
-      "hashPath": "efcat.model.1.1.4.nupkg.sha512"
+      "sha512": "sha512-3tjsw0/q2SwdBSEbHiZQiGA4o5IzvDMsjdjg7LTZoubg0NzHhHj4lFbDKV2NygMW84b1uqTn4hijOc7uiTcS0w==",
+      "path": "efcat.model/1.1.5",
+      "hashPath": "efcat.model.1.1.5.nupkg.sha512"
     },
-    "EFCAT.Model.Data/1.1.4": {
+    "EFCAT.Model.Data/1.1.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-PhN56OAKJa7QbwcbGIF3V1a6ZY9zoKBWiKght5BXgFO/mGCj/OueskxKetJ11QmEt+72lYIHjgqrxYLLcE/rDQ==",
-      "path": "efcat.model.data/1.1.4",
-      "hashPath": "efcat.model.data.1.1.4.nupkg.sha512"
+      "sha512": "sha512-OgTGYEFNItlkH1IltyVUyxb4J50UmAjct0UhBwPONaOsalqtZtC4yk5K8flr7VLw3I6+yGGC63ZCnRNXU1rrXg==",
+      "path": "efcat.model.data/1.1.5",
+      "hashPath": "efcat.model.data.1.1.5.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Cryptography.Internal/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nWXqkRSqJFnCaSiH6g4Ld2xhjdYhuS7iuWKMlEanhJxo79b939BV5e8j32JLW6bp9O3w8aPeiIa2UnN+Q585ag==",
+      "path": "microsoft.aspnetcore.cryptography.internal/6.0.1",
+      "hashPath": "microsoft.aspnetcore.cryptography.internal.6.0.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/6.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v/AU/L3M/48mgj3Y7Vavi2ZIrw7PASwj5lERk2bkGVDmQr3+edzJrHscrmdtJ/3OWOOsi3PNyRWMvFnRlbpDLw==",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/6.0.1",
+      "hashPath": "microsoft.aspnetcore.cryptography.keyderivation.6.0.1.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

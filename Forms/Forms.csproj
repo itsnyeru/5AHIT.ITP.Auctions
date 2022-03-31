@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EFCAT.Model.Data" Version="1.1.4" />
+    <PackageReference Include="EFCAT.Model.Data" Version="1.1.5" />
   </ItemGroup>
 
 </Project>

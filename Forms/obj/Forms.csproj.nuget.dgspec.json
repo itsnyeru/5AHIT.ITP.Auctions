@@ -47,7 +47,7 @@
           "dependencies": {
             "EFCAT.Model.Data": {
               "target": "Package",
-              "version": "[1.1.4, )"
+              "version": "[1.1.5, )"
             }
           },
           "imports": [
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300-preview.22154.4\\RuntimeIdentifierGraph.json"
         }
       }
     }

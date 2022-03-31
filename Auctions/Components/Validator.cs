@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Auctions.Shared;
+namespace Auctions.Components;
 
 public class Validator : ComponentBase {
     private ValidationMessageStore messageStore;

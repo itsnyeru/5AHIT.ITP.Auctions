@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T72F5b0m1t4UBwN+qp84k+3KIfLOF/6rVK94C0WG4kU=",
+  "Hash": "w4WsIknok68wnUM9DJY/Ux5bOu4/4oZYeKbeXhdSx0g=",
   "Source": "Auctions",
   "BasePath": "_content/Auctions",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
-    },
-    {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
-      "SourceId": "Auctions",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
-      "BasePath": "_content/Auctions",
-      "RelativePath": "css/open-iconic/FONT-LICENSE",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
@@ -202,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "SourceId": "Auctions",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "BasePath": "_content/Auctions",
+      "RelativePath": "css/open-iconic/FONT-LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
       "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
