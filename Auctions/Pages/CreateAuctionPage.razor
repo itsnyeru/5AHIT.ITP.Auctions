@@ -1,0 +1,23 @@
+﻿@page "/auction/create"
+
+<EditForm Model=Auction OnValidSubmit=OnValid>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <AuctionComponent Auction=Auction/>
+</EditForm>
+
+
+@code {
+    Auction Auction { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Auction = new Auction();
+    }
+
+    async Task OnValid()
+    {
+        
+    }
+}

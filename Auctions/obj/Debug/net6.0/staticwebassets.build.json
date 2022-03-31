@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w4WsIknok68wnUM9DJY/Ux5bOu4/4oZYeKbeXhdSx0g=",
+  "Hash": "rAUs+9MV+k487rsxEGx8JV0sh/h6tTgILGUoLc3DXa8=",
   "Source": "Auctions",
   "BasePath": "_content/Auctions",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Auctions\\wwwroot",
       "Source": "Auctions",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Auctions.styles.css",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Auctions.styles.css",
       "SourceId": "Auctions",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "Auctions.styles.css",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Auctions.styles.css"
+      "OriginalItemSpec": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Auctions.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Auctions.bundle.scp.css",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Auctions.bundle.scp.css",
       "SourceId": "Auctions",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "Auctions.bundle.scp.css",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Auctions.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Auctions.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\FONT-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\ICON-LICENSE"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\open-iconic\\README.md",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\open-iconic\\README.md",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\css\\site.css",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\favicon.ico",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\js\\bootstrap\\bootstrap.min.js",
+      "Identity": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\js\\bootstrap\\bootstrap.min.js",
       "SourceId": "Auctions",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\Auctions\\Auctions\\wwwroot\\",
+      "ContentRoot": "C:\\Schule\\5AHIT\\ITP\\Praxis\\5AHIT.ITP.Auctions\\Auctions\\wwwroot\\",
       "BasePath": "_content/Auctions",
       "RelativePath": "js/bootstrap/bootstrap.min.js",
       "AssetKind": "All",

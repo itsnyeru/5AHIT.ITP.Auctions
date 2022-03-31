@@ -10,3 +10,15 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Forms\obj\Debug\net6.0\
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Forms\obj\Debug\net6.0\ref\Forms.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Forms\obj\Debug\net6.0\Forms.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\Auctions\Forms\obj\Debug\net6.0\refint\Forms.dll
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\bin\Debug\net6.0\Forms.deps.json
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\bin\Debug\net6.0\Forms.dll
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\bin\Debug\net6.0\Forms.pdb
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.csproj.AssemblyReference.cache
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.AssemblyInfoInputs.cache
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.AssemblyInfo.cs
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.csproj.CoreCompileInputs.cache
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.dll
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\refint\Forms.dll
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\Forms.pdb
+C:\Schule\5AHIT\ITP\Praxis\5AHIT.ITP.Auctions\Forms\obj\Debug\net6.0\ref\Forms.dll

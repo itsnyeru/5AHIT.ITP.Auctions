@@ -15,18 +15,56 @@
             </div>
             <div class="py-2">
                 <div class="row py-2">
-                    <div class="col-md-12"> <label for="Description">Productname</label> <input type="text" class="bg-light form-control"> </div>
+                    <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
                 </div>
                 <div class="row py-2">
-                    <div class="col-md-12"> <label for="email">Description</label> <input type="text" class="bg-light form-control"> </div>
+                    <div class="col-md-12"> <label>Description</label> <textarea type="text" class="bg-light form-control" @bind=Auction.Description/> </div>
                 </div>
                 <div class="row py-2">
-                    <div class="col-md-12"> <label for="email">Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0"> </div>
+                    <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate > </div>
+                </div>
+
+                <div class="row py-2">
+                    @foreach(Categorie c in Categories)
+                    {
+                        <div>
+                          <input type="checkbox" id=@c.Label name=@c.Label>
+                          <label for=@c.Label>@c.Label</label>
+                        </div>
+                    }
                 </div>
 
 
+                <InputSelect @bind-Value=AuctionType>
+                    @foreach (Enum type in Enum.GetValues(typeof(EAuctionType)))
+                    {
+                        <option value=@type>@type</option>
+                    }
+                </InputSelect>
 
-                <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">Create Auction</button> </div>
+                @if (Auction is BiddingAuction ba)
+                {
+                    <div class="row py-2">
+                        <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
+                    </div>
+                     <div class="row py-2">
+                        <div class="col-md-12"> <label>Bit Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
+                    </div>
+                     <div class="row py-2">
+                        <div class="col-md-12"> <label>Instant Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.InstantBuyPrice> </div>
+                    </div>
+                } else if (Auction is BuyAuction baa)
+                {
+                    <div class="row py-2">
+                        <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
+                    </div>
+                }
+
+
+
+
+
+                <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Create Auction</button> </div>
                 <!-- <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                     <div> <b>Deactivate your account</b>
                         <p>Details about your company account and password</p>
@@ -52,5 +90,27 @@
 </style>
 
 @code {
+    [Parameter] public Auction Auction { get; set; }
 
+
+    public List<Categorie> Categories { get; set; } = new List<Categorie>() { new Categorie() { Label = "Spielzeug"}, new Categorie() { Label = "Auto"} };
+
+    private EAuctionType auctionType;
+    public EAuctionType AuctionType
+    {
+        get => auctionType;
+        set
+        {
+            if (value == EAuctionType.BIDDING) Auction = new BiddingAuction();
+            else Auction = new BuyAuction();
+            auctionType = value;
+        }
     }
+
+    protected async override Task OnInitializedAsync()
+    {
+        AuctionType = EAuctionType.BIDDING;
+    }
+
+    public enum EAuctionType { BIDDING, BUY }
+}
