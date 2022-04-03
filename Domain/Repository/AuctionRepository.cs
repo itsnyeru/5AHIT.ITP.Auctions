@@ -11,6 +11,8 @@ public class AuctionRepository : ARepositoryAsync<Auction>, IAuctionRepository {
     public AuctionRepository(AuctionDbContext context) : base(context) { }
 
     public async Task<List<Auction>> All(Auction? lastElement = null) => await _set
+        .Include(o => o.Buyer)
+        .Where(o => o.Buyer == null)
         .SkipWhile(o => lastElement != null && o.Id != lastElement.Id)
         .Take(20)
         .ToListAsync();
@@ -18,6 +20,8 @@ public class AuctionRepository : ARepositoryAsync<Auction>, IAuctionRepository {
     public async Task<List<Auction>> Filter(string title, List<Categorie> categories, Auction? lastElement = null) {
         return await _set
             .Include(o => o.Categories).ThenInclude(o => o.Categorie)
+            .Include(o => o.Buyer)
+            .Where(o => o.Buyer == null)
             .Where(o => string.IsNullOrWhiteSpace(title) ? true : o.Title.ToLower().Contains(title.ToLower()))
             .Where(o => !o.Categories.Any() ? true : CombineCategories(o.Categories.Select(o => o.Categorie)) == CombineCategories(categories))
             .SkipWhile(o => lastElement != null && o.Id != lastElement.Id)

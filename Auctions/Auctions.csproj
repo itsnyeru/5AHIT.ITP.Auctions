@@ -28,6 +28,7 @@
 	<ProjectReference Include="..\Domain\Domain.csproj" />
 	<ProjectReference Include="..\Forms\Forms.csproj" />
 	<ProjectReference Include="..\Service\Service.csproj" />
+	<ProjectReference Include="..\SignalR\SignalR.csproj" />
   </ItemGroup>
 
 </Project>

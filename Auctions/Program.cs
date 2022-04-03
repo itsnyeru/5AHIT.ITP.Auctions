@@ -4,6 +4,7 @@ using EFCAT.Service.Storage;
 using Microsoft.EntityFrameworkCore;
 using Model.Configuration;
 using Services;
+using SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,6 @@ builder.Services.AddLocalStorage();
 builder.Services.AddHttpClient();
 builder.Services.AddAuthenticationService<AuctionAuthentication>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,5 +50,7 @@ app.UseAuthentication();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.MapHub<AuctionHub>("/auctionhub");
 
 app.Run();
