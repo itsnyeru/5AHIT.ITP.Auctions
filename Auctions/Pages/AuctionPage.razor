@@ -1,0 +1,132 @@
+﻿@page "/auction/{AuctionId}"
+@using System.ComponentModel.DataAnnotations;
+
+
+<MudGrid>
+    <MudItem md="12" sm="12">
+        <MudText Typo="Typo.h3">Xbox</MudText>
+    </MudItem>
+
+    <MudItem Style="width:50%; height:500px; ">
+        <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
+            @foreach(string image in Images) {
+                <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
+                    <MudCardMedia Image="@($"pictures/{image}.jpg")" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;" />
+                </MudCarouselItem>
+            }
+        </MudCarousel>
+    </MudItem>
+    <MudItem Style="width:50%">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h4" Class="mb-4">Current Price: @AmountBefore</MudText>
+            <MudText Typo="Typo.h4" Class="mb-4"> Your Bet: @DecimalValue</MudText>
+            <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@UserName</MudText>
+            <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" @onclick="Bet" Label="Place Bet" Class="mt-4" />
+            <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
+                <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="Steps" Min="AmountBefore" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+            </MudPopover>
+        </MudPaper>
+    </MudItem>
+    <MudTabs md="12" sm="12" Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" Style="color: #55595c;">
+        <MudTabPanel Text="Description" Style="color: #55595c;">
+            <MudText>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</MudText>
+
+        </MudTabPanel>
+    </MudTabs>
+
+    <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
+        <MudText Typo="Typo.h5">Other Products of this Seller </MudText>
+        <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
+            @foreach(string image in Images) {
+                <MudContainer Class="mr-5 mb-5">
+                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
+
+                    <MudText Typo="Typo.h6"> Xbox One </MudText>
+                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
+                </MudContainer>
+
+
+            }
+            @foreach(string image in Images) {
+                <MudContainer Class="mr-5 mb-5">
+                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
+
+                    <MudText Typo="Typo.h6"> Xbox One </MudText>
+                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
+                </MudContainer>
+
+
+            }
+
+        </MudContainer>
+    </MudPaper>
+
+    <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
+        <MudText Typo="Typo.h5"> Similar Products </MudText>
+        <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
+            @foreach(string image in Images) {
+                <MudContainer Class="mr-5 mb-5">
+                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
+
+                    <MudText Typo="Typo.h6"> Xbox One </MudText>
+                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
+                </MudContainer>
+
+
+            }
+            @foreach(string image in Images) {
+                <MudContainer Class="mr-5 mb-5">
+                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
+
+                    <MudText Typo="Typo.h6"> Xbox One </MudText>
+                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
+                </MudContainer>
+
+
+            }
+
+        </MudContainer>
+    </MudPaper>
+</MudGrid>
+
+
+@code {
+    [Parameter] public string AuctionId { get; set; }
+    Auction Auction { get; set; }
+    
+    public decimal DecimalValue { get; set; }
+    public decimal AmountBefore { get; set; } = 20;
+    public decimal Steps { get; set; } = 2;
+    public string UserName { get; set; } = "Max";
+    public string[] Images { get; set; } = new[] { "xbox1", "xbox2", "xbox3", "xbox4" };
+    public int IndexImage = 0;
+    public bool opened;
+    public bool _isOpen;
+
+    protected async override Task OnInitializedAsync() {
+        Auction = new Auction();
+    }
+
+    async Task OnValid() {
+
+    }
+
+    public void Bet() {
+        SetDecimalValue();
+        ToggleOpen();
+    }
+
+    public void SetDecimalValue() {
+        if(!opened) {
+            DecimalValue = AmountBefore;
+            opened = true;
+        }
+
+    }
+    public void ToggleOpen() {
+        if(_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+}

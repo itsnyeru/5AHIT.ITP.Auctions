@@ -3,6 +3,7 @@ using EFCAT.Service.Authentication;
 using EFCAT.Service.Storage;
 using Microsoft.EntityFrameworkCore;
 using Model.Configuration;
+using MudBlazor.Services;
 using Services;
 using SignalR;
 
@@ -27,6 +28,8 @@ builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddLocalStorage();
 builder.Services.AddHttpClient();
 builder.Services.AddAuthenticationService<AuctionAuthentication>();
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 

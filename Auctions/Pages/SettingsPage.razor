@@ -2,12 +2,13 @@
 @using EFCAT.Model.Data
 @using Microsoft.AspNetCore.SignalR.Client
 @inject IUserRepository _userRepository
+@inject IJSRuntime _jsRuntime
 
 <AuthorizeView>
     <Authorized Context=AuthContext>
-        @if (User != null) {
+        @if(User != null) {
             <div id="accordion">
-                @if (User != null) {
+                @if(User != null) {
                     <EditForm Model=User OnValidSubmit=ExecuteSave>
                         <div class="card" style="margin-left: 10%; margin-right: 10%;">
                             <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
@@ -54,7 +55,7 @@
                         </div>
                     </EditForm>
                 }
-                @if (ChangePassword != null) {
+                @if(ChangePassword != null) {
                     <EditForm Model=ChangePassword OnValidSubmit=ExecuteChangePassword>
                         <div class="card" style="margin-left: 10%; margin-right: 10%;">
                             <div class="card-header" id="headingChangePassword" data-toggle="collapse" data-target="#collapseChangePassword" aria-expanded="false" aria-controls="collapseChangePassword">
@@ -101,6 +102,8 @@
                 </div>
             </div>
         }
+
+        <div id="paypal-button-container"></div>
     </Authorized>
     <NotAuthorized>
         <p>Du musst dich anmelden, um diese Seite zu sehen!</p>
@@ -118,6 +121,10 @@
         ChangePassword = new ChangePasswordForm() { CurrentPassword = Account.Password };
     }
 
+    protected async override Task OnAfterRenderAsync(bool firstRender) {
+        await _jsRuntime.InvokeVoidAsync("renderPayPal");
+    }
+
     private async Task ExecuteSave() {
         User.Password = ChangePassword.CurrentPassword;
         await _userRepository.UpdateAsync(User);
@@ -130,12 +137,12 @@
 
     private async Task InputImage(InputFileChangeEventArgs e) {
         try {
-            if (e.FileCount > 0) {
-                foreach (IBrowserFile file in e.GetMultipleFiles(1)) {
+            if(e.FileCount > 0) {
+                foreach(IBrowserFile file in e.GetMultipleFiles(1)) {
                     await User.Image.Set(file.OpenReadStream(5242880), file.ContentType);
                 }
             }
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             Console.WriteLine(ex.Message);
         }
         this.StateHasChanged();

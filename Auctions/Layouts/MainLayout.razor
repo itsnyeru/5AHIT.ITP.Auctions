@@ -2,6 +2,7 @@
 
 @using EFCAT.Service.Authentication
 @using Model.Entity
+@using MudBlazor
 @using Services
 @inject AuthenticationStateProvider AuthProvider
 
@@ -11,6 +12,9 @@
     <NavMenu />
 
     <main>
+        <MudThemeProvider />
+        <MudDialogProvider />
+        <MudSnackbarProvider />
         @Body
     </main>
 
