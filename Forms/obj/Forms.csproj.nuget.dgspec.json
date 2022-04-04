@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj": {}
+    "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj": {
+    "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj",
         "projectName": "Forms",
-        "projectPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj",
-        "packagesPath": "C:\\Users\\zelin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\Forms.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Forms\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zelin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300-preview.22154.4\\RuntimeIdentifierGraph.json"
         }
       }
     }

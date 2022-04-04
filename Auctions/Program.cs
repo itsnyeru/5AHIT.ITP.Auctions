@@ -19,8 +19,10 @@ builder.Services.AddDbContext<AuctionDbContext>(
     .EnableDetailedErrors()
 );
 
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICodeRepository, CodeRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddSingleton(builder.Configuration.GetSection("MailConnection").GetSection("DefaultMail").Get<MailSettings>());
 builder.Services.AddScoped<IMailService, MailService>();
@@ -52,6 +54,7 @@ app.UseCookiePolicy();
 app.UseAuthentication();
 
 app.MapBlazorHub();
+app.MapControllers();
 app.MapFallbackToPage("/_Host");
 
 app.MapHub<AuctionHub>("/auctionhub");

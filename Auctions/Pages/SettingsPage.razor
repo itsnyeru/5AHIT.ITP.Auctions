@@ -2,13 +2,14 @@
 @using EFCAT.Model.Data
 @using Microsoft.AspNetCore.SignalR.Client
 @inject IUserRepository _userRepository
+@inject ITransactionRepository _transactionRepository
 @inject IJSRuntime _jsRuntime
 
 <AuthorizeView>
     <Authorized Context=AuthContext>
-        @if(User != null) {
+        @if (User != null) {
             <div id="accordion">
-                @if(User != null) {
+                @if (User != null) {
                     <EditForm Model=User OnValidSubmit=ExecuteSave>
                         <div class="card" style="margin-left: 10%; margin-right: 10%;">
                             <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
@@ -22,7 +23,7 @@
 
                                     <div class="wrapper bg-white">
                                         <div class="d-flex align-items-start py-3 border-bottom">
-                                            <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" style="width: 100px; height: 100px; " alt="">
+                                            <img src="@(User.Image != null ? User.Image.GetImageSource() : "https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")" class="img" style="width: 100px; height: 100px; " alt="">
                                             <div class="pl-sm-4 pl-2" id="img-section">
                                                 <b>Profile Photo</b>
                                                 <p>Accepted file type .png. Less than 1MB</p>
@@ -55,7 +56,7 @@
                         </div>
                     </EditForm>
                 }
-                @if(ChangePassword != null) {
+                @if (ChangePassword != null) {
                     <EditForm Model=ChangePassword OnValidSubmit=ExecuteChangePassword>
                         <div class="card" style="margin-left: 10%; margin-right: 10%;">
                             <div class="card-header" id="headingChangePassword" data-toggle="collapse" data-target="#collapseChangePassword" aria-expanded="false" aria-controls="collapseChangePassword">
@@ -89,21 +90,57 @@
                     </EditForm>
                 }
                 <div class="card" style="margin-left: 10%; margin-right: 10%;">
-                    <div class="card-header" id="headingAuctions" data-toggle="collapse" data-target="#collapseAuctions" aria-expanded="false" aria-controls="collapseAuctions">
+                    <div class="card-header" id="headingBalance" data-toggle="collapse" data-target="#collapseBalance" aria-expanded="false" aria-controls="collapseBalance">
                         <h5 class="mb-0 bg text-light ">
-                            Your Auctions
+                            Your Balance
                         </h5>
                     </div>
-                    <div id="collapseAuctions" class="collapse" aria-labelledby="headingAuctions" data-parent="#accordion">
+                    <div id="collapseBalance" class="collapse" aria-labelledby="headingBalance" data-parent="#accordion">
                         <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <div class="wrapper bg-white">
+                                <div class="py-2">
+                                    @if (Transaction != null) {
+                                        <EditForm Model=Transaction OnValidSubmit=ExecuteCheckout>
+                                            <p><b>Current Balance:</b> @Account.Balance €</p>
+
+                                            <DataAnnotationsValidator />
+                                            <ValidationSummary />
+
+                                            <label>Add Balance</label>
+
+                                            <div class="row py-2">
+                                                <div class="col-md-6"> <input type="number" class="bg-light form-control" placeholder="1€" @bind-value=Transaction.Balance> </div>
+                                                <div class="col-md-6 align-bottom"> <button type="submit" class="btn btn-primary mr-3">Add Funds</button> </div>
+                                            </div>
+
+                                            <hr>
+
+                                        </EditForm>
+                                    } else {
+                                        <div class="py-3 pb-4 border-bottom"> <button type="button" @onclick=CancelCheckout class="btn btn-primary mr-3">Back</button> </div>
+                                    }
+
+                                    <div id="paypal-button-container" class="row py-2 justify-content-center"></div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-left: 10%; margin-right: 10%;">
+                <div class="card-header" id="headingAuctions" data-toggle="collapse" data-target="#collapseAuctions" aria-expanded="false" aria-controls="collapseAuctions">
+                    <h5 class="mb-0 bg text-light ">
+                        Your Auctions
+                    </h5>
+                </div>
+                <div id="collapseAuctions" class="collapse" aria-labelledby="headingAuctions" data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                     </div>
                 </div>
             </div>
         }
 
-        <div id="paypal-button-container"></div>
     </Authorized>
     <NotAuthorized>
         <p>Du musst dich anmelden, um diese Seite zu sehen!</p>
@@ -115,14 +152,12 @@
     [CascadingParameter] public User Account { get; set; }
     public User User { get; set; }
     private ChangePasswordForm ChangePassword { get; set; }
+    private TransactionForm Transaction { get; set; }
 
     protected async override Task OnInitializedAsync() {
         User = await _userRepository.GetUserById(Account.Id);
         ChangePassword = new ChangePasswordForm() { CurrentPassword = Account.Password };
-    }
-
-    protected async override Task OnAfterRenderAsync(bool firstRender) {
-        await _jsRuntime.InvokeVoidAsync("renderPayPal");
+        Transaction = new TransactionForm();
     }
 
     private async Task ExecuteSave() {
@@ -137,15 +172,36 @@
 
     private async Task InputImage(InputFileChangeEventArgs e) {
         try {
-            if(e.FileCount > 0) {
-                foreach(IBrowserFile file in e.GetMultipleFiles(1)) {
+            if (e.FileCount > 0) {
+                foreach (IBrowserFile file in e.GetMultipleFiles(1)) {
+                    if (User.Image == null) User.Image = new Image();
                     await User.Image.Set(file.OpenReadStream(5242880), file.ContentType);
                 }
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Console.WriteLine(ex.Message);
         }
         this.StateHasChanged();
+    }
+
+    private async Task CancelCheckout() {
+        Account.Balance = await _userRepository.GetBalance(Account.Id);
+        Transaction = new TransactionForm();
+        await _jsRuntime.InvokeVoidAsync("clearPayPal");
+        StateHasChanged();
+    }
+
+    private async Task ExecuteCheckout() {
+        Transaction transaction = new Transaction() { User = Account, Balance = Transaction.Balance };
+        Transaction = null;
+        await _transactionRepository.CreateAsync(transaction);
+        await _jsRuntime.InvokeVoidAsync("renderPayPal", transaction.User.Id, transaction.Token, transaction.Balance);
+    }
+
+    private class TransactionForm {
+        [NotNull]
+        [Min(1)]
+        public decimal Balance { get; set; } = 1;
     }
 
     private class ChangePasswordForm {

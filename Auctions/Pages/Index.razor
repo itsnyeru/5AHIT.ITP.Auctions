@@ -3,54 +3,35 @@
 
 <PageTitle>Home</PageTitle>
 
-<AuthorizeView>
-    <Authorized>
-        <h2>Auth</h2>
-        @Account.Username
-    </Authorized>
-    <NotAuthorized>
-        <h2>Not</h2>
-    </NotAuthorized>
-</AuthorizeView>
-
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1>Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-    </div>
-</section>
-
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-
-            @for (int i = 0; i < 3; i++) {
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#55595c" /></svg>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h2>Headline</h2>
-                                <h2>Price</h2>
-                            </div>
-                            <hr>
-                            <p class="card-text">description</p>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                </div>
-                                <small class="text-muted">timer</small>
-                            </div>
-                        </div>
+  <div class="container">
+        <div class="bg-white rounded d-flex align-items-center justify-content-between" id="header"> <button class="btn btn-hide text-uppercase" type="button" data-toggle="collapse" data-target="#filterbar" aria-expanded="false" aria-controls="filterbar" id="filter-btn" onclick="changeBtnTxt()"> <span class="fas fa-angle-left" id="filter-angle"></span> <span id="btn-txt">Hide filters</span> </button>
+            <nav class="navbar navbar-expand-lg navbar-light pl-lg-0 pl-auto"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="mynav" aria-expanded="false" aria-label="Toggle navigation" onclick="chnageIcon()" id="icon"> <span class="navbar-toggler-icon"></span> </button>
+             
+            </nav>
+        </div>
+        <div id="content" class="my-5">
+            <div id="filterbar" class="collapse">
+                <div class="box border-bottom">
+                    <div class="box-label text-uppercase d-flex align-items-center ">Categories </div>
+                    <div class="box border-bottom"></div>
+                    <div id="inner-box" >
+                        <div class="my-1"> <label class="tick">Windbreaker <input type="checkbox" id="myCheck"  > <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Jumpsuit <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Jacket <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Coat <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Raincoat <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Handbag <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Warm vest <input type="checkbox"> <span class="check"></span> </label> </div>
+                        <div class="my-1"> <label class="tick">Wallets <input type="checkbox"> <span class="check"></span> </label> </div>
+                    </div>
+                      
+                </div>
+                <div class="box border-bottom">
+                    <div class="form-group text-center">
+                        <div class="btn-group" data-toggle="buttons"> <label class="btn btn-success form-check-label"> <input class="form-check-input" type="radio" onclick="uncheck()"> Reset </label> <label class="btn btn-success form-check-label active"> <input class="form-check-input" type="radio" checked> Apply </label> </div>
                     </div>
                 </div>
-            }
-
+               
         </div>
     </div>
 </div>

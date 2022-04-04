@@ -5,7 +5,10 @@ using Model.Entity;
 
 namespace Domain.Repository;
 
-public interface IAuctionRepository : IRepositoryAsync<Auction> { }
+public interface IAuctionRepository : IRepositoryAsync<Auction> {
+    Task<List<Auction>> All(Auction? lastElement = null);
+    Task<List<Auction>> Filter(string title, List<Categorie> categories, Auction? lastElement = null);
+}
 
 public class AuctionRepository : ARepositoryAsync<Auction>, IAuctionRepository {
     public AuctionRepository(AuctionDbContext context) : base(context) { }

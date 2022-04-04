@@ -51,5 +51,7 @@ namespace Model.Entity {
         public ICollection<BiddingAuctionBid> Bids { get; set; }
 
         public ICollection<Code> Codes { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

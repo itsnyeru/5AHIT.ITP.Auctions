@@ -5199,23 +5199,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\zelin\\.nuget\\packages\\": {},
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\Service.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\Service.csproj",
       "projectName": "Service",
-      "projectPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\Service.csproj",
-      "packagesPath": "C:\\Users\\zelin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\obj\\",
+      "projectPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\Service.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\zelin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5231,11 +5231,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Domain\\Domain.csproj"
+            "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Domain\\Domain.csproj"
             },
-            "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\zelin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj"
+            "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj"
             }
           }
         }
@@ -5274,7 +5274,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300-preview.22154.4\\RuntimeIdentifierGraph.json"
       }
     }
   }

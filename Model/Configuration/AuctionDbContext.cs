@@ -15,8 +15,8 @@ namespace Model.Configuration {
         public DbSet<Code> Codes { get; set; }
         public DbSet<EmailVerificationCode> EmailVerificationCodes { get; set; }
         public DbSet<PasswordResetCode> PasswordResetCodes { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public AuctionDbContext(DbContextOptions<AuctionDbContext> options) : base(options, true) { }
-
     }
 }
