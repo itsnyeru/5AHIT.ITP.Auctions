@@ -1,15 +1,39 @@
-﻿<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+﻿@using EFCAT.Model.Data
+<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
 
         <div class="wrapper bg-white">
             <div class="d-flex align-items-start py-3 border-bottom">
                 <div class="pl-sm-4 pl-2" id="img-section">
                     <b>Product Photos</b>
-                    <p>Accepted file type .png</p> <button class="btn button border"><b>Upload</b></button>
+                    <p>Accepted file type .png</p>
+                    <button type="button" class="btn button border" onclick="document.getElementById('selectFile').click();"><b>Upload</b></button>
+                    <InputFile OnChange=InputImage id="selectFile" style="display:none" />
                 </div>
             </div>
-            <div></div>
-            
+            <div>
+                <MudItem Style="width:100%; height:500px; padding-top: 20px; padding-bottom:60px; " >
+                     <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
+                @if (Auction.Images != null)
+                {
+                  
+                       
+                            @foreach (var image in Auction.Images)
+                            {
+                               <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
+                                    <MudCardMedia Image="@(image.Image.GetImageSource())" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;"/>
+                               </MudCarouselItem>
+                            }
+                       
+                
+               }
+                    </MudCarousel>
+               </MudItem>
+               
+                       <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Delete Current Picture</button> </div>
+
+            </div>
+
             <div class="py-2">
                 <div class="row py-2">
                     <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
@@ -21,6 +45,9 @@
                     <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate> </div>
                 </div>
 
+                 <div class="row py-2">
+                    <div class="col-md-12"> <label>Categories</label>  </div>
+                </div>
                 @if (Categories.Any())
                 {
                     <div class="row py-2">
@@ -30,8 +57,17 @@
                         }
                     </div>
                 }
-
-
+                <div class="row py-2">
+                <MudSelect T="EDeliveryType" Label="Delivery Type" AnchorOrigin="Origin.BottomCenter" >
+                     @foreach (Enum type in Enum.GetValues(typeof(EDeliveryType)))
+                        {
+                            <MudSelectItem Value="@type" />
+                        }
+                </MudSelect>
+                </div>
+                
+                   
+               
 
                 <InputSelect @bind-Value=AuctionType>
                     @foreach (Enum type in Enum.GetValues(typeof(EAuctionType)))
@@ -107,12 +143,33 @@
         if (Auction.Categories == null) Auction.Categories = new List<AuctionCategorie>();
         if ((bool)e.Value) Auction.Categories.Add(new AuctionCategorie() { Categorie = c });
         else Auction.Categories.Remove(Auction.Categories.FirstOrDefault(o => o.Categorie == c));
-        if(Auction.Categories.Any()) Console.WriteLine(Auction.Categories.Select(o => o.Categorie.Label).Aggregate((a, b) => a + ", " + b));
+        if (Auction.Categories.Any()) Console.WriteLine(Auction.Categories.Select(o => o.Categorie.Label).Aggregate((a, b) => a + ", " + b));
     }
 
     public enum EAuctionType { BIDDING, BUY }
 
 
-
+    private async Task InputImage(InputFileChangeEventArgs e)
+    {
+        if (Auction.Images == null)
+            Auction.Images = new List<AuctionImage>();
+        try
+        {
+            if (e.FileCount > 0)
+            {
+                foreach (IBrowserFile file in e.GetMultipleFiles(1))
+                {
+                    Image image = new Image();
+                    await image.Set(file.OpenReadStream(5242880), file.ContentType);
+                    Auction.Images.Add(new AuctionImage() { Image = image });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        this.StateHasChanged();
+    }
 
 }
