@@ -11,103 +11,99 @@
                     <InputFile OnChange=InputImage id="selectFile" style="display:none" />
                 </div>
             </div>
+            
             <div>
                 <MudItem Style="width:100%; height:500px; padding-top: 20px; padding-bottom:60px; " >
                      <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
                 @if (Auction.Images != null)
-                {
-                  
-                       
+                
                             @foreach (var image in Auction.Images)
                             {
                                <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
                                     <MudCardMedia Image="@(image.Image.GetImageSource())" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;"/>
                                </MudCarouselItem>
                             }
-                       
-                
-               }
+                      
+               
                     </MudCarousel>
                </MudItem>
-               
-                       <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Delete Current Picture</button> </div>
+               <!--<div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3" OnClick="@(async () => await DeleteAsync(_carousel.SelectedIndex))">Delete Current Picture</button> </div>-->
 
             </div>
-
-            <div class="py-2">
-                <div class="row py-2">
-                    <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
-                </div>
-                <div class="row py-2">
-                    <div class="col-md-12"> <label>Description</label> <textarea type="text" class="bg-light form-control" @bind=Auction.Description /> </div>
-                </div>
-                <div class="row py-2">
-                    <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate> </div>
-                </div>
-
-                 <div class="row py-2">
-                    <div class="col-md-12"> <label>Categories</label>  </div>
-                </div>
-                @if (Categories.Any())
-                {
+            <div style="max-width:700px; margin: 0 auto">
+                 <div class="py-2">
                     <div class="row py-2">
-                        @foreach (Categorie c in Categories.Select(o => o.Key))
-                        {
-                            <MudCheckBox @bind-Checked="Categories[c]" @oninput="(e) => CategoryChange(c, e)">@c.Label</MudCheckBox>
-                        }
+                        <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
                     </div>
-                }
-                <div class="row py-2">
-                <MudSelect T="EDeliveryType" Label="Delivery Type" AnchorOrigin="Origin.BottomCenter" >
-                     @foreach (Enum type in Enum.GetValues(typeof(EDeliveryType)))
-                        {
-                            <MudSelectItem Value="@type" />
-                        }
-                </MudSelect>
-                </div>
-                
-                   
-               
+                    <div class="row py-2">
+                        <div class="col-md-12"> <label>Description</label> <textarea type="text" class="bg-light form-control" @bind=Auction.Description /> </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate> </div>
+                    </div>
 
-                <InputSelect @bind-Value=AuctionType>
-                    @foreach (Enum type in Enum.GetValues(typeof(EAuctionType)))
+                     <div class="row py-2">
+                        <div class="col-md-12"> <label>Categories</label>  </div>
+                    </div>
+                    @if (Categories.Any())
                     {
-                        <option value=@type>@type</option>
+                        <div class="row py-2">
+                            @foreach (Categorie c in Categories.Select(o => o.Key))
+                            {
+                                <MudCheckBox @bind-Checked="Categories[c]" @oninput="(e) => CategoryChange(c, e)">@c.Label</MudCheckBox>
+                            }
+                        </div>
                     }
-                </InputSelect>
-
-                @if (Auction is BiddingAuction ba)
-                {
-                    <div class="row py-2">
-                        <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
+                    <div class="py-2">
+                    <InputSelect Label="Delivery Type" @bind-Value="Auction.DeliveryType">
+                         @foreach (Enum type in Enum.GetValues(typeof(EDeliveryType)))
+                        {
+                            <option value=@type>@type</option>
+                        }
+                    </InputSelect>
                     </div>
-                    <div class="row py-2">
-                        <div class="col-md-12"> <label>Bit Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
+                    <div class="py-2">
+                        <InputSelect @bind-Value=AuctionType>
+                            @foreach (Enum type in Enum.GetValues(typeof(EAuctionType)))
+                            {
+                                <option value=@type>@type</option>
+                            }
+                        </InputSelect>
+
+                        @if (Auction is BiddingAuction ba)
+                        {
+                            <div class="row py-2">
+                                <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-md-12"> <label>Bit Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-md-12"> <label>Instant Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.InstantBuyPrice> </div>
+                            </div>
+                        }
+                        else if (Auction is BuyAuction baa)
+                        {
+                            <div class="row py-2">
+                                <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
+                            </div>
+                        }
                     </div>
-                    <div class="row py-2">
-                        <div class="col-md-12"> <label>Instant Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.InstantBuyPrice> </div>
-                    </div>
-                }
-                else if (Auction is BuyAuction baa)
-                {
-                    <div class="row py-2">
-                        <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
-                    </div>
-                }
 
 
 
 
+                    <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Create Auction</button> </div>
+                    <!-- <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                        <div> <b>Deactivate your account</b>
+                            <p>Details about your company account and password</p>
+                        </div>
+                        <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
+                    </div> -->
 
-                <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Create Auction</button> </div>
-                <!-- <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                    <div> <b>Deactivate your account</b>
-                        <p>Details about your company account and password</p>
-                    </div>
-                    <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
-                </div> -->
-
+                </div>
             </div>
+               
         </div>
 
     </div>
@@ -117,7 +113,6 @@
     [Parameter] public Auction Auction { get; set; }
 
     public Dictionary<Categorie, bool> Categories { get; set; }
-
 
     private EAuctionType auctionType;
     public EAuctionType AuctionType
@@ -171,5 +166,4 @@
         }
         this.StateHasChanged();
     }
-
 }
