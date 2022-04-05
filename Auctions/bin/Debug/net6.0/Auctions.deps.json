@@ -1236,7 +1236,8 @@
       "SignalR/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.SignalR.Client": "6.0.3",
-          "Microsoft.AspNetCore.SignalR.Core": "1.1.0"
+          "Microsoft.AspNetCore.SignalR.Core": "1.1.0",
+          "Model": "1.0.0"
         },
         "runtime": {
           "SignalR.dll": {}

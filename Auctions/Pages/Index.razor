@@ -1,41 +1,74 @@
 ﻿@page "/"
 @using Model.Entity
+@inject IAuctionRepository _repository
 
 <PageTitle>Home</PageTitle>
 
-  <div class="container">
-        <div class="bg-white rounded d-flex align-items-center justify-content-between" id="header"> <button class="btn btn-hide text-uppercase" type="button" data-toggle="collapse" data-target="#filterbar" aria-expanded="false" aria-controls="filterbar" id="filter-btn" onclick="changeBtnTxt()"> <span class="fas fa-angle-left" id="filter-angle"></span> <span id="btn-txt">Hide filters</span> </button>
-            <nav class="navbar navbar-expand-lg navbar-light pl-lg-0 pl-auto"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="mynav" aria-expanded="false" aria-label="Toggle navigation" onclick="chnageIcon()" id="icon"> <span class="navbar-toggler-icon"></span> </button>
-             
-            </nav>
-        </div>
-        <div id="content" class="my-5">
-            <div id="filterbar" class="collapse">
-                <div class="box border-bottom">
-                    <div class="box-label text-uppercase d-flex align-items-center ">Categories </div>
-                    <div class="box border-bottom"></div>
-                    <div id="inner-box" >
-                        <div class="my-1"> <label class="tick">Windbreaker <input type="checkbox" id="myCheck"  > <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Jumpsuit <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Jacket <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Coat <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Raincoat <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Handbag <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Warm vest <input type="checkbox"> <span class="check"></span> </label> </div>
-                        <div class="my-1"> <label class="tick">Wallets <input type="checkbox"> <span class="check"></span> </label> </div>
-                    </div>
-                      
-                </div>
-                <div class="box border-bottom">
-                    <div class="form-group text-center">
-                        <div class="btn-group" data-toggle="buttons"> <label class="btn btn-success form-check-label"> <input class="form-check-input" type="radio" onclick="uncheck()"> Reset </label> <label class="btn btn-success form-check-label active"> <input class="form-check-input" type="radio" checked> Apply </label> </div>
+@if (Search != null) {
+    <div class="container">
+        <EditForm Model=Search OnValidSubmit=ExecuteSearch>
+            <div id="header" class="bg-white rounded d-flex align-items-center justify-content-between">
+                <button class="btn btn-hide text-uppercase" type="button" data-toggle="collapse" data-target="#filterbar" aria-expanded="false" aria-controls="filterbar" id="filter-btn"> <span class="fas fa-angle-left" id="filter-angle"></span> <span id="btn-txt">Hide filters</span> </button>
+                <input class="w-100 h-100 h3 px-2" @bind-value=Search.Name />
+                <button class="btn btn-hide text-uppercase" type="submit"><span>Search</span></button>
+            </div>
+            <div id="content" class="my-5">
+                <div id="filterbar" class="collapse position-absolute">
+                    <div class="box border-bottom">
+                        <div class="box-label text-uppercase d-flex align-items-center ">Categories </div>
+                        <div class="box border-bottom"></div>
+                        <div id="inner-box">
+                            @if (Search.Categories != null && Search.Categories.Any()) {
+                                @foreach (Categorie category in Search.Categories.Keys) {
+                                    <div class="my-1"> <label class="tick">@category.Label <input type="checkbox" @bind-value=Search.Categories[category]> <span class="check"></span> </label> </div>
+                                }
+                            } else {
+                                <p>No categories available!</p>
+                            }
+                        </div>
                     </div>
                 </div>
-               
-        </div>
+            </div>
+        </EditForm>
     </div>
+}
+
+<div class="container">
+    @if (Filtered != null && Filtered.Any()) {
+        @foreach (Auction auction in Filtered) {
+            <p>@auction.Title</p>
+        }
+        <div class="bg-white rounded d-flex align-items-center justify-content-center">
+            <button class="btn btn-hide text-uppercase" type="button"><span>More</span></button>
+        </div>
+    } else {
+        <p>No Auctions found!</p>
+    }
 </div>
 
-@code{
+@code {
     [CascadingParameter] public User Account { get; set; }
+
+    private SearchObject Search { get; set; }
+
+    private List<Auction> Filtered { get; set; }
+
+    protected async override Task OnInitializedAsync() {
+        Search = new SearchObject();
+        Search.Categories = (await _repository.GetCategories()).ToDictionary(o => o, o => false);
+        await ExecuteSearch();
+    }
+
+    private async Task ExecuteSearch() {
+        Filtered = await _repository.Filter(Search.Name, Search.Categories.Where(o => o.Value).Select(o => o.Key).ToList(), null);
+    }
+
+    private async Task ExecuteAddResults() {
+        Filtered.AddRange(await _repository.Filter(Search.Name, Search.Categories.Where(o => o.Value).Select(o => o.Key).ToList(), Filtered.Last()));
+    }
+
+    class SearchObject {
+        public string Name { get; set; }
+        public Dictionary<Categorie, bool> Categories { get; set; }
+    }
 }

@@ -415,7 +415,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Documents\\Files\\Schule\\5AHIT\\ITP\\5AHIT.ITP.Auctions\\Model\\Model.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

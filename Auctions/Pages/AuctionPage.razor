@@ -1,132 +1,141 @@
 ﻿@page "/auction/{AuctionId}"
 @using System.ComponentModel.DataAnnotations;
+@using EFCAT.Model.Data
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager _navigationManager
+@inject IAuctionRepository _repository
 
+@if (Auction != null) {
+    <MudGrid Class="w-75 mx-auto">
+        <MudItem md="12" sm="12">
+            <MudText Typo="Typo.h3">@Auction.Title</MudText>
+        </MudItem>
 
-<MudGrid>
-    <MudItem md="12" sm="12">
-        <MudText Typo="Typo.h3">Xbox</MudText>
-    </MudItem>
-
-    <MudItem Style="width:50%; height:500px; ">
-        <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
-            @foreach(string image in Images) {
-                <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
-                    <MudCardMedia Image="@($"pictures/{image}.jpg")" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;" />
-                </MudCarouselItem>
+        <MudItem Style="width:50%; height:500px; ">
+            @if (Auction.Images.Any()) {
+                <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
+                    @foreach (Image image in Auction.Images.Select(o => o.Image)) {
+                        <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
+                            <MudCardMedia Image="@image.GetImageSource()" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;" />
+                        </MudCarouselItem>
+                    }
+                </MudCarousel>
+            } else {
+                <p class="mx-auto my-auto">No Images available!</p>
             }
-        </MudCarousel>
-    </MudItem>
-    <MudItem Style="width:50%">
-        <MudPaper Class="pa-4">
-            <MudText Typo="Typo.h4" Class="mb-4">Current Price: @AmountBefore</MudText>
-            <MudText Typo="Typo.h4" Class="mb-4"> Your Bet: @DecimalValue</MudText>
-            <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@UserName</MudText>
-            <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" @onclick="Bet" Label="Place Bet" Class="mt-4" />
-            <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
-                <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="Steps" Min="AmountBefore" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
-            </MudPopover>
+        </MudItem>
+        <MudItem Style="width:50%">
+            <MudPaper Class="pa-4">
+                @if (Auction is BiddingAuction bia) {
+                    <MudText Typo="Typo.h4" Class="mb-4">@(bia.Bidders.Any() ? $"Last Bet: {bia.Bidders.Last().Price} by {bia.Bidders.Last().Bidder.Username}" : $"Start with first bet at {bia.StartingPrice}")</MudText>
+                    <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@Auction.Seller.Username</MudText>
+                    <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="@(bia.Step ?? 1)" Min="@(bia.Bidders.Any() ? 20 : bia.StartingPrice)" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+                    <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" @onclick="Bet" Label="Place Bet" Class="mt-4" />
+                }
+            </MudPaper>
+        </MudItem>
+        <MudTabs Class="w-100" md="12" sm="12" Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" Style="color: #55595c;">
+            <MudTabPanel Text="Description" Style="color: #55595c;">
+                <MudText>@Auction.Description</MudText>
+
+            </MudTabPanel>
+        </MudTabs>
+
+        <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
+            <MudText Typo="Typo.h5">Other Products of this Seller </MudText>
+            <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
+                @if (SellerProducts != null && SellerProducts.Any()) {
+                    @foreach (Auction auction in SellerProducts) {
+                        <MudContainer Class="mr-5 mb-5">
+                            <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
+
+                            <MudText Typo="Typo.h6"> @auction.Title </MudText>
+                            <MudText Typo="Typo.subtitle1"> @(auction is BiddingAuction spbia ? $"Highest Bid: {spbia.Bidders.Last().Price} EUR" : auction is BuyAuction spbua ? $"Price: {spbua.MinimumPrice} EUR" : "") </MudText>
+                        </MudContainer>
+                    }
+                } else {
+                    <p>This user has no further items.</p>
+                }
+
+            </MudContainer>
         </MudPaper>
-    </MudItem>
-    <MudTabs md="12" sm="12" Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" Style="color: #55595c;">
-        <MudTabPanel Text="Description" Style="color: #55595c;">
-            <MudText>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</MudText>
 
-        </MudTabPanel>
-    </MudTabs>
+        <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
+            <MudText Typo="Typo.h5"> Similar Products </MudText>
+            <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
+                @if (SimiliarProducts != null && SimiliarProducts.Any()) {
+                    @foreach (Auction auction in SimiliarProducts) {
+                        <MudContainer Class="mr-5 mb-5">
+                            <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
 
-    <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
-        <MudText Typo="Typo.h5">Other Products of this Seller </MudText>
-        <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
-            @foreach(string image in Images) {
-                <MudContainer Class="mr-5 mb-5">
-                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
-
-                    <MudText Typo="Typo.h6"> Xbox One </MudText>
-                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
-                </MudContainer>
-
-
-            }
-            @foreach(string image in Images) {
-                <MudContainer Class="mr-5 mb-5">
-                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
-
-                    <MudText Typo="Typo.h6"> Xbox One </MudText>
-                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
-                </MudContainer>
-
-
-            }
-
-        </MudContainer>
-    </MudPaper>
-
-    <MudPaper class="mt-5 pa-3 mb-5" Height="300px" Width="100%">
-        <MudText Typo="Typo.h5"> Similar Products </MudText>
-        <MudContainer class="mt-5 " Style="position:relative; overflow-x: scroll; display:flex">
-            @foreach(string image in Images) {
-                <MudContainer Class="mr-5 mb-5">
-                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
-
-                    <MudText Typo="Typo.h6"> Xbox One </MudText>
-                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
-                </MudContainer>
-
-
-            }
-            @foreach(string image in Images) {
-                <MudContainer Class="mr-5 mb-5">
-                    <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@($"pictures/{image}.jpg")" />
-
-                    <MudText Typo="Typo.h6"> Xbox One </MudText>
-                    <MudText Typo="Typo.subtitle1"> Highest Bid: 300 EUR </MudText>
-                </MudContainer>
-
-
-            }
-
-        </MudContainer>
-    </MudPaper>
-</MudGrid>
-
+                            <MudText Typo="Typo.h6"> @auction.Title </MudText>
+                            <MudText Typo="Typo.subtitle1"> @(auction is BiddingAuction spbia ? $"Highest Bid: {spbia.Bidders.Last().Price} EUR" : auction is BuyAuction spbua ? $"Price: {spbua.MinimumPrice} EUR" : "") </MudText>
+                        </MudContainer>
+                    }
+                } else {
+                    <p>There are no similiar items.</p>
+                }
+            </MudContainer>
+        </MudPaper>
+    </MudGrid>
+} else {
+    <p>Auction not available!</p>
+}
 
 @code {
+    [CascadingParameter] public User Account { get; set; }
     [Parameter] public string AuctionId { get; set; }
     Auction Auction { get; set; }
-    
+    HubConnection? HubConnection { get; set; }
+
+    List<Auction> SellerProducts { get; set; }
+    List<Auction> SimiliarProducts { get; set; }
+
     public decimal DecimalValue { get; set; }
-    public decimal AmountBefore { get; set; } = 20;
-    public decimal Steps { get; set; } = 2;
-    public string UserName { get; set; } = "Max";
-    public string[] Images { get; set; } = new[] { "xbox1", "xbox2", "xbox3", "xbox4" };
-    public int IndexImage = 0;
-    public bool opened;
-    public bool _isOpen;
 
     protected async override Task OnInitializedAsync() {
-        Auction = new Auction();
+        try {
+            Auction = new BiddingAuction() {
+                    Id = 1,
+                    Seller = new User() { Username = "Max" },
+                    Description = "Cooles Ding",
+                    EndDate = DateTime.Now.AddHours(1),
+                    Bidders = new List<BiddingAuctionBid>(),
+                    DeliveryType = EDeliveryType.DELIVER,
+                    Title = "Beste",
+                    Categories = new List<AuctionCategorie>(),
+                    Images = new List<AuctionImage>(),
+                    StartingPrice = 20,
+                    Step = 2
+
+                };
+            //Auction = await _repository.ReadAsync(Convert.ToInt32(AuctionId));
+            //SellerProducts = await _repository.GetSellerProducts(Account);
+            //SimiliarProducts = await _repository.GetSimiliarProducts(Auction);
+
+            HubConnection = new HubConnectionBuilder().WithUrl(_navigationManager.ToAbsoluteUri("/auctionhub")).Build();
+
+            HubConnection.On<BiddingAuctionBid>($"ReceiveBet-{Auction.Id}", (bid) => {
+                BiddingAuction biddingAuction = Auction as BiddingAuction;
+                biddingAuction.Bidders.Add(bid);
+                StateHasChanged();
+            });
+
+            await HubConnection.StartAsync();
+        } catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+            Auction = null;
+        }
     }
 
     async Task OnValid() {
 
     }
 
-    public void Bet() {
-        SetDecimalValue();
-        ToggleOpen();
-    }
-
-    public void SetDecimalValue() {
-        if(!opened) {
-            DecimalValue = AmountBefore;
-            opened = true;
-        }
-
-    }
-    public void ToggleOpen() {
-        if(_isOpen)
-            _isOpen = false;
-        else
-            _isOpen = true;
+    public async Task Bet() {
+        if (HubConnection == null && Auction == null) return;
+        BiddingAuction biddingAuction = Auction as BiddingAuction;
+        BiddingAuctionBid bid = new BiddingAuctionBid() { Auction = biddingAuction, Bidder = Account, Price = DecimalValue };
+        await HubConnection.SendAsync("SendBet", bid);
     }
 }
