@@ -1,10 +1,14 @@
-﻿@page "/auction/create"
+﻿@page "/auctions/create"
+@inject IAuctionRepository _repository
 
 <EditForm Model=Auction OnValidSubmit=OnValid>
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <AuctionComponent Auction=Auction/>
+    @if (Auction != null)
+    {
+        <AuctionComponent Auction=Auction />
+    }
 </EditForm>
 
 
@@ -13,11 +17,14 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Auction = new Auction();
+        Auction = new Auction()
+            {
+                Categories = new List<AuctionCategorie>()
+            };
     }
 
     async Task OnValid()
     {
-        
+        await _repository.CreateAsync(Auction);
     }
 }

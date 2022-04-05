@@ -8,31 +8,29 @@
                     <p>Accepted file type .png</p> <button class="btn button border"><b>Upload</b></button>
                 </div>
             </div>
-            <div class="d-flex align-items-start py-3 border-bottom">
-                <div class="pl-sm-4 pl-2" id="img-section">
-                    <b>Uploaded Photos:</b>
-                </div>
-            </div>
+            <div></div>
+            
             <div class="py-2">
                 <div class="row py-2">
                     <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
                 </div>
                 <div class="row py-2">
-                    <div class="col-md-12"> <label>Description</label> <textarea type="text" class="bg-light form-control" @bind=Auction.Description/> </div>
+                    <div class="col-md-12"> <label>Description</label> <textarea type="text" class="bg-light form-control" @bind=Auction.Description /> </div>
                 </div>
                 <div class="row py-2">
-                    <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate > </div>
+                    <div class="col-md-12"> <label>End Date</label> <input type="date" class="bg-light form-control" @bind=Auction.EndDate> </div>
                 </div>
 
-                <div class="row py-2">
-                    @foreach(Categorie c in Categories)
-                    {
-                        <div>
-                          <input type="checkbox" id=@c.Label name=@c.Label>
-                          <label for=@c.Label>@c.Label</label>
-                        </div>
-                    }
-                </div>
+                @if (Categories.Any())
+                {
+                    <div class="row py-2">
+                        @foreach (Categorie c in Categories.Select(o => o.Key))
+                        {
+                            <MudCheckBox @bind-Checked="Categories[c]" @oninput="(e) => CategoryChange(c, e)">@c.Label</MudCheckBox>
+                        }
+                    </div>
+                }
+
 
 
                 <InputSelect @bind-Value=AuctionType>
@@ -47,13 +45,14 @@
                     <div class="row py-2">
                         <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
                     </div>
-                     <div class="row py-2">
+                    <div class="row py-2">
                         <div class="col-md-12"> <label>Bit Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
                     </div>
-                     <div class="row py-2">
+                    <div class="row py-2">
                         <div class="col-md-12"> <label>Instant Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.InstantBuyPrice> </div>
                     </div>
-                } else if (Auction is BuyAuction baa)
+                }
+                else if (Auction is BuyAuction baa)
                 {
                     <div class="row py-2">
                         <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
@@ -92,8 +91,8 @@
 @code {
     [Parameter] public Auction Auction { get; set; }
 
+    public Dictionary<Categorie, bool> Categories { get; set; }
 
-    public List<Categorie> Categories { get; set; } = new List<Categorie>() { new Categorie() { Label = "Spielzeug"}, new Categorie() { Label = "Auto"} };
 
     private EAuctionType auctionType;
     public EAuctionType AuctionType
@@ -110,7 +109,21 @@
     protected async override Task OnInitializedAsync()
     {
         AuctionType = EAuctionType.BIDDING;
+        List<Categorie> categories = new List<Categorie>() { new Categorie() { Label = "Spielzeug" }, new Categorie() { Label = "Auto" } };
+        Categories = categories.ToDictionary(o => o, o => false);
+    }
+
+    void CategoryChange(Categorie c, ChangeEventArgs e)
+    {
+        if (Auction.Categories == null) Auction.Categories = new List<AuctionCategorie>();
+        if ((bool)e.Value) Auction.Categories.Add(new AuctionCategorie() { Categorie = c });
+        else Auction.Categories.Remove(Auction.Categories.FirstOrDefault(o => o.Categorie == c));
+        if(Auction.Categories.Any()) Console.WriteLine(Auction.Categories.Select(o => o.Categorie.Label).Aggregate((a, b) => a + ", " + b));
     }
 
     public enum EAuctionType { BIDDING, BUY }
+
+
+
+
 }
