@@ -1,0 +1,62 @@
+﻿@page "/panel/users"
+@layout AdminLayout
+@inject IUserRepository _repository
+
+<PageTitle>Users</PageTitle>
+
+<EditForm Model=SearchItem OnValidSubmit=Update>
+    <input @bind-value=SearchItem.Name placeholder="Search..."/>
+    <button type="submit">Search</button>
+</EditForm>
+
+@if(Users != null && Users.Any()) {
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Admin</th>
+            <th>Action</th>
+        </tr>
+        @foreach(User user in Users) {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td><button @onclick="() => UpdateAdmin(user)">@(user.IsAdmin ? "Admin" : "User")</button></td>
+                <td><button @onclick="() => Remove(user)">Delete</button></td>                
+            </tr>
+        }
+    </table>
+
+} else {
+    <p>No users available.</p>
+}
+
+@code {
+    Search SearchItem { get; set; }
+    List<User> Users { get; set; }
+
+    protected async override Task OnInitializedAsync() {
+        SearchItem = new Search();
+        await Update();
+    }
+
+    private async Task Update() {
+        Users = await _repository.GetPanelUsers(SearchItem.Name);
+        StateHasChanged();
+    }
+
+    private async Task UpdateAdmin(User user) {
+        user.IsAdmin = !user.IsAdmin;
+        await _repository.UpdateAsync(user);
+        StateHasChanged();
+    }
+
+    private async Task Remove(User user) {
+        await _repository.DeleteAsync(user);
+        Users.Remove(user);
+    }
+
+    private class Search {
+        public string Name { get; set; }
+    }
+}

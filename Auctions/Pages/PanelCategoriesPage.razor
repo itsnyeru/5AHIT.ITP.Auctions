@@ -1,0 +1,41 @@
+﻿@page "/panel/categories"
+@layout AdminLayout
+@inject ICategoryRepository _repository
+
+<PageTitle>Categories</PageTitle>
+
+@if(Categories != null && Categories.Any()) {
+    @foreach(Categorie category in Categories) {
+        <button @onclick="() => Remove(category)">@category.Label</button>
+    }
+} else {
+    <p>No categories available.</p>
+}
+
+<hr />
+
+<EditForm Model=Category OnValidSubmit=Add>
+    <input @bind-value=Category.Label />
+    <button type="submit">Add</button>
+</EditForm>
+
+@code {
+    Categorie Category { get; set; }
+    List<Categorie> Categories { get; set; }
+
+    protected async override Task OnInitializedAsync() {
+        Category = new Categorie();
+        Categories = await _repository.GetCategories();
+    }
+
+    private async Task Add() {
+        await _repository.CreateAsync(Category);
+        Categories.Add(Category);
+        Category = new Categorie();
+    }
+
+    private async Task Remove(Categorie category) {
+        await _repository.DeleteAsync(category);
+        Categories.Remove(category);
+    }
+}

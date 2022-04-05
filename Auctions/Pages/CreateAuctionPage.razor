@@ -1,4 +1,5 @@
 ﻿@page "/auction/create"
+@inject IAuctionRepository _repository
 
 <EditForm Model=Auction OnValidSubmit=OnValid>
     <DataAnnotationsValidator />

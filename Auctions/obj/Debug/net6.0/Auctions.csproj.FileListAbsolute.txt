@@ -389,3 +389,5 @@ C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\bin\
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\bin\Debug\net6.0\SignalR.dll
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\bin\Debug\net6.0\SignalR.pdb
 C:\Users\Admin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\obj\Debug\net6.0\scopedcss\Pages\Index.razor.rz.scp.css
+C:\Users\zelin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\obj\Debug\net6.0\scopedcss\Layouts\AdminLayout.razor.rz.scp.css
+C:\Users\zelin\Documents\Files\Schule\5AHIT\ITP\5AHIT.ITP.Auctions\Auctions\obj\Debug\net6.0\scopedcss\Pages\Index.razor.rz.scp.css

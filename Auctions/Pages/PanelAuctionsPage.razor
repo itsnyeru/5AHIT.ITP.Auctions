@@ -1,0 +1,56 @@
+﻿@page "/panel/auctions"
+@layout AdminLayout
+@inject IAuctionRepository _repository
+
+<PageTitle>Auctions</PageTitle>
+
+<EditForm Model=SearchItem OnValidSubmit=Update>
+    <input @bind-value=SearchItem.Name placeholder="Search..."/>
+    <button type="submit">Search</button>
+</EditForm>
+
+
+@if(Auctions != null && Auctions.Any()) {
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Action</th>
+        </tr>
+        @foreach(Auction auction in Auctions) {
+            <tr>
+                <td>@auction.Id</td>
+                <td>@auction.Title</td>
+                <td><button @onclick="() => Remove(auction)">Delete</button></td>                
+            </tr>
+        }
+    </table>
+
+} else {
+    <p>No auctions available.</p>
+}
+
+
+@code {
+    Search SearchItem { get; set; }
+    List<Auction> Auctions { get; set; }
+
+    protected async override Task OnInitializedAsync() {
+        SearchItem = new Search();
+        await Update();
+    }
+
+    private async Task Update() {
+        Auctions = await _repository.GetPanelAuctions(SearchItem.Name);
+        StateHasChanged();
+    }
+
+    private async Task Remove(Auction auction) {
+        await _repository.DeleteAsync(auction);
+        Auctions.Remove(auction);
+    }
+
+    private class Search {
+        public string Name { get; set; }
+    }
+}

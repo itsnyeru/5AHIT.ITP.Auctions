@@ -9,13 +9,19 @@
         <ul class="navbar-nav ml-auto">
             <AuthorizeView>
                 <Authorized>
-                    <li class="nav-item dropdown text-dark">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">account_circle</i><span>@Account.Username</span></a>
-                        <div id="navbarDropdownProfile" class="dropdown-menu mr-auto" aria-labelledby="navbarDropdown">
-                            <NavLink class="nav-link" href="/settings">Settings</NavLink>
-                            <NavLink class="nav-link" href="/logout">Logout</NavLink>
-                        </div>
-                    </li>
+                    @if(Account != null) {
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons">account_circle</i><span>@Account.Username</span></a>
+                            <div id="navbarDropdownProfile" class="dropdown-menu mr-auto" aria-labelledby="navbarDropdown">
+                                <NavLink class="nav-link" href="/settings">Settings</NavLink>
+                                @if(Account.IsAdmin) {
+                                    <NavLink class="nav-link" href="/panel">Panel</NavLink>
+                                }
+                                <NavLink class="nav-link" href="/logout">Logout</NavLink>
+                            </div>
+                        </li>
+                    }
+
                 </Authorized>
                 <NotAuthorized>
                     <li class="nav-item">
@@ -30,11 +36,11 @@
 <Authentication />
 
 <style>
-    #navbarDropdownProfile > *{
+    #navbarDropdownProfile > * {
         color: black !important;
     }
 
-    .dropdown-menu{
+    .dropdown-menu {
         left: auto;
         right: 0;
     }

@@ -1,0 +1,18 @@
+﻿@inherits LayoutComponentBase
+@layout MainLayout
+
+@using Model.Entity
+
+<PageTitle>Panel</PageTitle>
+
+@if(Account != null) {
+    @if(Account.IsAdmin) {
+        @Body
+    } else {
+        <p>Not enough permission!</p>
+    }
+}
+
+@code {
+    [CascadingParameter] public User Account { get; set; }
+}

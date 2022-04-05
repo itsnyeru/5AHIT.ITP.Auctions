@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICodeRepository, CodeRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddSingleton(builder.Configuration.GetSection("MailConnection").GetSection("DefaultMail").Get<MailSettings>());
 builder.Services.AddScoped<IMailService, MailService>();

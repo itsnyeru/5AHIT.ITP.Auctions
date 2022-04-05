@@ -11,6 +11,7 @@ public interface IAuctionRepository : IRepositoryAsync<Auction> {
     Task<List<Categorie>> GetCategories();
     Task<List<Auction>> GetSellerProducts(User user);
     Task<List<Auction>> GetSimiliarProducts(Auction auction);
+    Task<List<Auction>> GetPanelAuctions(string name);
 }
 
 public class AuctionRepository : ARepositoryAsync<Auction>, IAuctionRepository {
@@ -46,4 +47,7 @@ public class AuctionRepository : ARepositoryAsync<Auction>, IAuctionRepository {
             .Where(o => o.Id != auction.Id)
             .Take(20)
             .ToListAsync();
+
+
+    public async Task<List<Auction>> GetPanelAuctions(string name) => await _set.Where(o => string.IsNullOrWhiteSpace(name) ? true : o.Title.ToUpper().Contains(name.ToUpper())).Take(20).ToListAsync();
 }

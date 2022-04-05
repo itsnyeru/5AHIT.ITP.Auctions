@@ -8,7 +8,7 @@
 
 <PageTitle>Auctions</PageTitle>
 
-<CascadingValue Value="Account" IsFixed=true>
+<CascadingValue Value="Account" IsFixed=false>
     <NavMenu />
 
     <main class="my-2">
@@ -22,6 +22,12 @@
 </CascadingValue>
 
 @code {
-    IAuthenticationService<User> Auth { get => ((IAuthenticationService<User>)AuthProvider); }
-    User Account { get => Auth.GetAccount() ?? new User(); }
+    public IAuthenticationService<User> Auth { get; private set; }
+    public User Account { get; private set; }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender) {
+        Auth = ((IAuthenticationService<User>)AuthProvider);
+        Account = Auth.GetAccount() ?? new User();
+        StateHasChanged();
+    }
 }
