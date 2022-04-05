@@ -26,6 +26,10 @@ namespace Model.Entity {
         [Number(10,2)]
         public decimal? FinalPrice { get; set; }
 
+        [NotNull]
+        [Enum(typeof(string))]
+        public EDeliveryType DeliveryType { get; set; } = EDeliveryType.DELIVER;
+
         [ForeignColumn(EForeignType.MANY_TO_ONE, "BUYER_ID")]
         public User? Buyer { get; set; }
 
@@ -35,4 +39,8 @@ namespace Model.Entity {
         [ReferenceColumn("Auction")]
         public ICollection<AuctionCategorie> Categories { get; set; }
     }
+}
+
+public enum EDeliveryType {
+    DELIVER, PICK_UP
 }

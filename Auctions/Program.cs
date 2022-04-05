@@ -3,7 +3,9 @@ using EFCAT.Service.Authentication;
 using EFCAT.Service.Storage;
 using Microsoft.EntityFrameworkCore;
 using Model.Configuration;
+using MudBlazor.Services;
 using Services;
+using SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,10 @@ builder.Services.AddDbContext<AuctionDbContext>(
     .EnableDetailedErrors()
 );
 
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICodeRepository, CodeRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddSingleton(builder.Configuration.GetSection("MailConnection").GetSection("DefaultMail").Get<MailSettings>());
 builder.Services.AddScoped<IMailService, MailService>();
@@ -27,6 +31,7 @@ builder.Services.AddLocalStorage();
 builder.Services.AddHttpClient();
 builder.Services.AddAuthenticationService<AuctionAuthentication>();
 
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
@@ -49,6 +54,9 @@ app.UseCookiePolicy();
 app.UseAuthentication();
 
 app.MapBlazorHub();
+app.MapControllers();
 app.MapFallbackToPage("/_Host");
+
+app.MapHub<AuctionHub>("/auctionhub");
 
 app.Run();

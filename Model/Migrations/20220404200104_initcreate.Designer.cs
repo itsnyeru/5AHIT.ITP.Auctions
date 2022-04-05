@@ -11,7 +11,7 @@ using Model.Configuration;
 namespace Model.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    [Migration("20220202133713_initcreate")]
+    [Migration("20220404200104_initcreate")]
     partial class initcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,11 @@ namespace Model.Migrations
 
                     b.Property<int?>("BUYER_ID")
                         .HasColumnType("int");
+
+                    b.Property<string>("DeliveryType")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("DELIVERY_TYPE");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -163,6 +168,48 @@ namespace Model.Migrations
                     b.ToTable("USER_HAS_CODES", (string)null);
 
                     b.HasDiscriminator<string>("DISCRIMINATOR").HasValue("Code");
+                });
+
+            modelBuilder.Entity("Model.Entity.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("BALANCE");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("CREATED_ON");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("IS_APPROVED");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("TOKEN");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("TYPE");
+
+                    b.Property<int?>("USER_ID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ValidUntil")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("VALID_UNTIL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("USER_ID");
+
+                    b.ToTable("TRANSACTIONS", (string)null);
                 });
 
             modelBuilder.Entity("Model.Entity.User", b =>
@@ -371,6 +418,16 @@ namespace Model.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Model.Entity.Transaction", b =>
+                {
+                    b.HasOne("Model.Entity.User", "User")
+                        .WithMany("Transactions")
+                        .HasForeignKey("USER_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Model.Entity.User", b =>
                 {
                     b.OwnsOne("EFCAT.Model.Data.Image", "Image", b1 =>
@@ -438,6 +495,8 @@ namespace Model.Migrations
                     b.Navigation("Codes");
 
                     b.Navigation("Sells");
+
+                    b.Navigation("Transactions");
                 });
 
             modelBuilder.Entity("Model.Entity.BiddingAuction", b =>

@@ -252,3 +252,12 @@ a, .btn-link {
         padding: 60px 20px 40px !important;
     }
 }
+
+.card {
+    /*linear-gradient(to right, #33a3ff, #0675cf, #4cd5ff);*/
+}
+
+.card-header {
+    background: #55595c;
+    cursor: pointer;
+}

@@ -70,6 +70,8 @@ namespace Model.Migrations
                     START_DATE = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     END_DATE = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     FINAL_PRICE = table.Column<decimal>(type: "decimal(12,2)", precision: 12, scale: 2, nullable: false),
+                    DELIVERY_TYPE = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     BUYER_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -84,6 +86,33 @@ namespace Model.Migrations
                     table.ForeignKey(
                         name: "FK_AUCTIONS_BT_USERS_SELLER_ID",
                         column: x => x.SELLER_ID,
+                        principalTable: "USERS",
+                        principalColumn: "USER_ID",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "TRANSACTIONS",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    USER_ID = table.Column<int>(type: "int", nullable: true),
+                    TOKEN = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    BALANCE = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TYPE = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CREATED_ON = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    VALID_UNTIL = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IS_APPROVED = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TRANSACTIONS", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_TRANSACTIONS_USERS_USER_ID",
+                        column: x => x.USER_ID,
                         principalTable: "USERS",
                         principalColumn: "USER_ID",
                         onDelete: ReferentialAction.Cascade);
@@ -256,6 +285,11 @@ namespace Model.Migrations
                 column: "BIDDER_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TRANSACTIONS_USER_ID",
+                table: "TRANSACTIONS",
+                column: "USER_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_USER_HAS_CODES_USER_ID",
                 table: "USER_HAS_CODES",
                 column: "USER_ID");
@@ -286,6 +320,9 @@ namespace Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "BUY_AUCTION");
+
+            migrationBuilder.DropTable(
+                name: "TRANSACTIONS");
 
             migrationBuilder.DropTable(
                 name: "USER_HAS_CODES");
