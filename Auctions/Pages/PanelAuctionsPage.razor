@@ -4,32 +4,35 @@
 
 <PageTitle>Auctions</PageTitle>
 
-<EditForm Model=SearchItem OnValidSubmit=Update>
-    <input @bind-value=SearchItem.Name placeholder="Search..."/>
-    <button type="submit">Search</button>
-</EditForm>
+<div style="width:80%;padding-left:20%" class="wrapper bg-white">
+     <div style="width:50%; padding-left:1%">
+        <EditForm Model=SearchItem OnValidSubmit=Update class="row">
+        <MudTextField @bind-Value=SearchItem.Name Placeholder="Search..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
+        <MudButton type="submit" Variant="Variant.Filled">Search</MudButton>
+    </EditForm>
+    </div>
 
 
-@if(Auctions != null && Auctions.Any()) {
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Action</th>
-        </tr>
-        @foreach(Auction auction in Auctions) {
-            <tr>
-                <td>@auction.Id</td>
-                <td>@auction.Title</td>
-                <td><button @onclick="() => Remove(auction)">Delete</button></td>                
-            </tr>
-        }
-    </table>
-
-} else {
-    <p>No auctions available.</p>
-}
-
+    @if(Auctions != null && Auctions.Any()) {
+        <MudTable Items="@Auctions" FixedHeader="true"  Height="400px" Hover="true">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>Title</MudTh>
+                <MudTh>Action</MudTh>
+            </HeaderContent>
+             <RowTemplate >
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Title">@context.Title</MudTd>
+                <MudTd DataLabel="Id" @onclick="() => Remove(context)">Action</MudTd>
+             </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+            </PagerContent>
+        </MudTable>
+    } else {
+        <p>No auctions available.</p>
+    }
+</div>
 
 @code {
     Search SearchItem { get; set; }

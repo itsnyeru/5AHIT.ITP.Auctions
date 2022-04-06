@@ -15,11 +15,14 @@
                             <div id="navbarDropdownProfile" class="dropdown-menu mr-auto" aria-labelledby="navbarDropdown">
                                 <NavLink class="nav-link" href="/settings">Settings</NavLink>
                                 @if(Account.IsAdmin) {
-                                    <NavLink class="nav-link" href="/panel">Panel</NavLink>
+                                     <NavLink class="nav-link" href="/panel/users">Users</NavLink>
+                                     <NavLink class="nav-link" href="/panel/auctions">Auctions</NavLink>
+                                     <NavLink class="nav-link" href="/panel/categories">Categories</NavLink>   
                                 }
                                 <NavLink class="nav-link" href="/logout">Logout</NavLink>
                             </div>
                         </li>
+                        
                     }
 
                 </Authorized>
@@ -31,6 +34,7 @@
             </AuthorizeView>
         </ul>
     </div>
+
 </nav>
 
 <Authentication />

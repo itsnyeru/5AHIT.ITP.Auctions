@@ -3,22 +3,40 @@
 @inject ICategoryRepository _repository
 
 <PageTitle>Categories</PageTitle>
-
+<div style="width:80%;padding-left:20%" class="wrapper bg-white">
 @if(Categories != null && Categories.Any()) {
-    @foreach(Categorie category in Categories) {
-        <button @onclick="() => Remove(category)">@category.Label</button>
-    }
+    <MudTable Items="@Categories" FixedHeader="true" Height="400px" Hover="true">
+        <HeaderContent>
+            <MudTh>Label</MudTh>
+            <MudTh>Action</MudTh>
+        </HeaderContent>
+         <RowTemplate >
+            <MudTd DataLabel="Label" class="cursor-default">@context.Label</MudTd>
+            <MudTd DataLabel="Action" @onclick="() => Remove(context)" class="cursor-default"> <MudIcon Icon="@Icons.Filled.Delete" Color="Color.Default" /></MudTd>
+         </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+    </MudTable>
+    
 } else {
     <p>No categories available.</p>
 }
 
 <hr />
 
-<EditForm Model=Category OnValidSubmit=Add>
-    <input @bind-value=Category.Label />
-    <button type="submit">Add</button>
-</EditForm>
+     <div style="padding-left:1%;">
+    <EditForm Model=Category OnValidSubmit=Add class="row">
+        <MudItem xs="3" sm="6" md="4">
+        <MudTextField @bind-Value="Category.Label" Label="New Category" Style="min-height:100%" Variant="Variant.Filled"></MudTextField>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4" >
+        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Style="min-height:100%">Add</MudButton>
+        </MudItem>
+    </EditForm>
+    </div>
 
+</div>
 @code {
     Categorie Category { get; set; }
     List<Categorie> Categories { get; set; }
@@ -29,9 +47,11 @@
     }
 
     private async Task Add() {
+        Console.WriteLine("star wars");
         await _repository.CreateAsync(Category);
         Categories.Add(Category);
         Category = new Categorie();
+        this.StateHasChanged();
     }
 
     private async Task Remove(Categorie category) {

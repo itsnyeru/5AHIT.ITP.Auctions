@@ -1,0 +1,30 @@
+﻿@page "/auction/edit/{AuctionId}"
+@inject IAuctionRepository _repository
+
+<EditForm Model=Auction OnValidSubmit=OnValid>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @if (Auction != null)
+    {
+        <AuctionComponent Auction=Auction />
+    }
+</EditForm>
+
+
+@code {
+    [Parameter] public string AuctionId { get; set; }
+
+    Auction Auction { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Auction = await _repository.ReadAsync(Convert.ToInt32(AuctionId));
+    }
+
+
+    async Task OnValid()
+    {
+        await _repository.UpdateAsync(Auction);
+    }
+}
