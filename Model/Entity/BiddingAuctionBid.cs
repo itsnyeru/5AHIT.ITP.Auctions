@@ -3,6 +3,9 @@ namespace Model.Entity {
     [Table("BIDDING_AUCTION_BIDS")]
     public class BiddingAuctionBid {
         [PrimaryKey]
+        [AutoIncrement]
+        public int Id { get; set; }
+
         [ForeignColumn(EForeignType.MANY_TO_ONE, "AUCTION_ID")]
         public BiddingAuction Auction { get; set; }
 

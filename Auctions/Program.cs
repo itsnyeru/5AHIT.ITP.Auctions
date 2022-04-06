@@ -13,11 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddDbContext<AuctionDbContext>(
-    options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new System.Version("8.0.25")))
-    .EnableSensitiveDataLogging()
-    .EnableDetailedErrors()
-);
+Action<DbContextOptionsBuilder> optionsAction = (options) => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version("8.0.25")));
+
+
+builder.Services.AddDbContext<AuctionDbContext>(optionsAction);
+builder.Services.AddDbContext<AuthenticationDbContext>(optionsAction);
 
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

@@ -1,8 +1,10 @@
 ﻿@using EFCAT.Model.Data
+@inject IAuctionRepository _repository
+
 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
     <div class="card-body">
 
-        <div class="wrapper bg-white">
+        <div class="wrapper bg-white" style="max-width:700px; margin: 0 auto">
             <div class="d-flex align-items-start py-3 border-bottom">
                 <div class="pl-sm-4 pl-2" id="img-section">
                     <b>Product Photos</b>
@@ -12,25 +14,23 @@
                 </div>
             </div>
             
-            <div>
-                <MudItem Style="width:100%; height:500px; padding-top: 20px; padding-bottom:60px; " >
-                     <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
-                @if (Auction.Images != null)
-                
-                            @foreach (var image in Auction.Images)
-                            {
-                               <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
-                                    <MudCardMedia Image="@(image.Image.GetImageSource())" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;"/>
-                               </MudCarouselItem>
-                            }
-                      
-               
-                    </MudCarousel>
-               </MudItem>
-               <!--<div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3" OnClick="@(async () => await DeleteAsync(_carousel.SelectedIndex))">Delete Current Picture</button> </div>-->
+                @if (Auction.Images != null && Auction.Images.Any()) {
+                    <div>
+                        <MudItem Style="width:100%; height:500px; padding-top: 20px; padding-bottom:60px; " >
+                             <MudCarousel Class="mud-width-full" ItemsSource="@Auction.Images.ToList()" @bind-SelectedIndex="selectedIndex"  AutoCycle="false" TData="AuctionImage" Style="height:100%; width:100%;">
+                                <ItemTemplate>
+                                    <MudCardMedia Image="@(context.Image.GetImageSource())" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;"/>
+	                            </ItemTemplate>
+                            </MudCarousel>
+                       </MudItem>
+                       <div class="py-3 pb-4 border-bottom"> <button type="button" class="btn btn-primary mr-3" @onclick="DeleteAsync">Delete Current Picture</button> </div>
 
-            </div>
-            <div style="max-width:700px; margin: 0 auto">
+                    </div>
+                } else {
+                    <p>No images uploaded!</p>
+                }
+            
+            <div>
                  <div class="py-2">
                     <div class="row py-2">
                         <div class="col-md-12"> <label>Productname</label> <input type="text" class="bg-light form-control" @bind-value=Auction.Title> </div>
@@ -45,7 +45,7 @@
                      <div class="row py-2">
                         <div class="col-md-12"> <label>Categories</label>  </div>
                     </div>
-                    @if (Categories.Any())
+                    @if (Categories != null && Categories.Any())
                     {
                         <div class="row py-2">
                             @foreach (Categorie c in Categories.Select(o => o.Key))
@@ -55,7 +55,8 @@
                         </div>
                     }
                     <div class="py-2">
-                    <InputSelect Label="Delivery Type" @bind-Value="Auction.DeliveryType">
+
+                    <InputSelect class="dropdown-select" @bind-Value="Auction.DeliveryType">
                          @foreach (Enum type in Enum.GetValues(typeof(EDeliveryType)))
                         {
                             <option value=@type>@type</option>
@@ -63,20 +64,15 @@
                     </InputSelect>
                     </div>
                     <div class="py-2">
-                        <InputSelect @bind-Value=AuctionType>
-                            @foreach (Enum type in Enum.GetValues(typeof(EAuctionType)))
-                            {
-                                <option value=@type>@type</option>
-                            }
-                        </InputSelect>
+                        
 
                         @if (Auction is BiddingAuction ba)
                         {
                             <div class="row py-2">
-                                <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
+                                <div class="col-md-12"> <label>Starting Bid </label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.StartingPrice> </div>
                             </div>
                             <div class="row py-2">
-                                <div class="col-md-12"> <label>Bit Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
+                                <div class="col-md-12"> <label>Bid Step</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.Step> </div>
                             </div>
                             <div class="row py-2">
                                 <div class="col-md-12"> <label>Instant Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=ba.InstantBuyPrice> </div>
@@ -85,7 +81,7 @@
                         else if (Auction is BuyAuction baa)
                         {
                             <div class="row py-2">
-                                <div class="col-md-12"> <label>Starting Bit</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
+                                <div class="col-md-12"> <label>Buy Price</label> <input type="number" class="bg-light form-control" placeholder="0" @bind-value=baa.MinimumPrice> </div>
                             </div>
                         }
                     </div>
@@ -94,12 +90,6 @@
 
 
                     <div class="py-3 pb-4 border-bottom"> <button type="submit" class="btn btn-primary mr-3">Create Auction</button> </div>
-                    <!-- <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                        <div> <b>Deactivate your account</b>
-                            <p>Details about your company account and password</p>
-                        </div>
-                        <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
-                    </div> -->
 
                 </div>
             </div>
@@ -109,28 +99,34 @@
     </div>
 </div>
 
+<style>
+    .dropdown-select{
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid #ced4da;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+    }
+
+    </style>
+
 @code {
     [Parameter] public Auction Auction { get; set; }
 
+    private int selectedIndex = 0;
+
     public Dictionary<Categorie, bool> Categories { get; set; }
 
-    private EAuctionType auctionType;
-    public EAuctionType AuctionType
-    {
-        get => auctionType;
-        set
-        {
-            if (value == EAuctionType.BIDDING) Auction = new BiddingAuction();
-            else Auction = new BuyAuction();
-            auctionType = value;
-        }
-    }
 
     protected async override Task OnInitializedAsync()
     {
-        AuctionType = EAuctionType.BIDDING;
-        List<Categorie> categories = new List<Categorie>() { new Categorie() { Label = "Spielzeug" }, new Categorie() { Label = "Auto" } };
-        Categories = categories.ToDictionary(o => o, o => false);
+        List<Categorie> categories = await _repository.GetCategories();
+        List<Categorie> auctionCategories = Auction.Categories.Select(o => o.Categorie).ToList();
+        Categories = categories.ToDictionary(o => o, o => auctionCategories.Contains(o));
     }
 
     void CategoryChange(Categorie c, ChangeEventArgs e)
@@ -138,11 +134,7 @@
         if (Auction.Categories == null) Auction.Categories = new List<AuctionCategorie>();
         if ((bool)e.Value) Auction.Categories.Add(new AuctionCategorie() { Categorie = c });
         else Auction.Categories.Remove(Auction.Categories.FirstOrDefault(o => o.Categorie == c));
-        if (Auction.Categories.Any()) Console.WriteLine(Auction.Categories.Select(o => o.Categorie.Label).Aggregate((a, b) => a + ", " + b));
     }
-
-    public enum EAuctionType { BIDDING, BUY }
-
 
     private async Task InputImage(InputFileChangeEventArgs e)
     {
@@ -164,6 +156,15 @@
         {
             Console.WriteLine(ex.Message);
         }
+        this.StateHasChanged();
+    }
+
+    private async Task DeleteAsync(){
+        AuctionImage ai = Auction.Images.ToList()[selectedIndex];
+        Console.WriteLine(selectedIndex);
+        selectedIndex = ai == Auction.Images.First() ? 0 : selectedIndex - 1;
+        Console.WriteLine(selectedIndex);
+        Auction.Images.Remove(ai);
         this.StateHasChanged();
     }
 }

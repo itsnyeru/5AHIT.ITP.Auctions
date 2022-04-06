@@ -12,8 +12,8 @@
         </MudItem>
 
         <MudItem Style="width:50%; height:500px; ">
-            @if (Auction.Images.Any()) {
-                <MudCarousel Class="mud-width-full" AutoCycle="false" TData="object" Style="height:100%; width:100%;">
+            @if (Auction.Images != null && Auction.Images.Any()) {
+                <MudCarousel Class="mud-width-full" AutoCycle="false" TData="Image" Style="height:100%; width:100%;">
                     @foreach (Image image in Auction.Images.Select(o => o.Image)) {
                         <MudCarouselItem Transition="@Transition.Fade" Color="Color.Transparent">
                             <MudCardMedia Image="@image.GetImageSource()" Size="@Size.Large" Style="width:100%; height:100%;background-size:contain;" />
@@ -21,17 +21,37 @@
                     }
                 </MudCarousel>
             } else {
-                <p class="mx-auto my-auto">No Images available!</p>
+                <p class="mx-auto my-auto">No Images uploaded!</p>
             }
         </MudItem>
         <MudItem Style="width:50%">
             <MudPaper Class="pa-4">
-                @if (Auction is BiddingAuction bia) {
-                    <MudText Typo="Typo.h4" Class="mb-4">@(bia.Bidders.Any() ? $"Last Bet: {bia.Bidders.Last().Price} by {bia.Bidders.Last().Bidder.Username}" : $"Start with first bet at {bia.StartingPrice}")</MudText>
-                    <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@Auction.Seller.Username</MudText>
-                    <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="@(bia.Step ?? 1)" Min="@(bia.Bidders.Any() ? 20 : bia.StartingPrice)" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
-                    <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" @onclick="Bet" Label="Place Bet" Class="mt-4" />
+                @if (DateTime.Now > Auction.EndDate) {
+                    @if (Auction.Buyer != null) {
+                        <p>Bought by @Auction.Buyer.Username for @Auction.FinalPrice EUR</p>
+                    } else {
+                        <p>Nobody bought this item.</p>
+                    }
+                } else {
+                    @if (Auction is BiddingAuction bia) {
+                        <MudText Typo="Typo.h4" Class="mb-4">@(bia.Bidders != null && bia.Bidders.Any() ? $"Last Bet: {bia.Bidders.Last().Price} by {bia.Bidders.Last().Bidder.Username}" : $"Start with first bet at {bia.StartingPrice}")</MudText>
+                        @if (bia.InstantBuyPrice != null) {
+                            <MudText Typo="Typo.h4" Class="mb-4">Instant Buy Price: @bia.InstantBuyPrice</MudText>
+                        }
+                        <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@Auction.Seller.Username</MudText>
+                        <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="@(bia.Step ?? 1)" Min="@(bia.Bidders.Any() ? (bia.Bidders.Last().Price + (bia.Step ?? 0)) : bia.StartingPrice)" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+                        <MudFab Icon="@Icons.Material.Filled.Add" Color="Color.Primary" @onclick="Bet" Label="Place Bet" Class="mt-4" />
+                        @if (bia.InstantBuyPrice != null) {
+                            <MudFab Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Primary" @onclick="Buy" Label="Buy" Class="mt-4" />
+                        }
+                    } else if (Auction is BuyAuction bua) {
+                        <MudText Typo="Typo.h4" Class="mb-4">Buy Price: @bua.MinimumPrice</MudText>
+                        <MudText Typo="Typo.body1" Class="mb-4"><strong>Seller: </strong>@Auction.Seller.Username</MudText>
+                        <MudNumericField @bind-Value="DecimalValue" Variant="Variant.Text" Step="@bua.MinimumPrice" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+                        <MudFab Icon="@Icons.Material.Filled.ShoppingCart" Color="Color.Primary" @onclick="Buy" Label="Buy" Class="mt-4" />
+                    }
                 }
+
             </MudPaper>
         </MudItem>
         <MudTabs Class="w-100" md="12" sm="12" Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" Style="color: #55595c;">
@@ -47,10 +67,17 @@
                 @if (SellerProducts != null && SellerProducts.Any()) {
                     @foreach (Auction auction in SellerProducts) {
                         <MudContainer Class="mr-5 mb-5">
-                            <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
+                            @if (auction.Images != null && auction.Images.Any()) {
+                                <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
+                            }
 
                             <MudText Typo="Typo.h6"> @auction.Title </MudText>
-                            <MudText Typo="Typo.subtitle1"> @(auction is BiddingAuction spbia ? $"Highest Bid: {spbia.Bidders.Last().Price} EUR" : auction is BuyAuction spbua ? $"Price: {spbua.MinimumPrice} EUR" : "") </MudText>
+
+                            @if (Auction is BiddingAuction spbia) {
+                                <MudText Typo="Typo.subtitle1" Class="mb-4">@(spbia.Bidders != null && spbia.Bidders.Any() ? $"Last Bet: {spbia.Bidders.Last().Price} by {spbia.Bidders.Last().Bidder.Username}" : $"Start with first bet at {spbia.StartingPrice}")</MudText>
+                            } else if (Auction is BuyAuction spbua) {
+                                <MudText Typo="Typo.subtitle1" Class="mb-4">Buy Price: @spbua.MinimumPrice</MudText>
+                            }
                         </MudContainer>
                     }
                 } else {
@@ -66,10 +93,17 @@
                 @if (SimiliarProducts != null && SimiliarProducts.Any()) {
                     @foreach (Auction auction in SimiliarProducts) {
                         <MudContainer Class="mr-5 mb-5">
-                            <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
+                            @if (auction.Images != null && auction.Images.Any()) {
+                                <MudImage ObjectFit="ObjectFit.ScaleDown" Style="border:solid; border-color:whitesmoke; position: relative; overflow-x: hidden;" Height="150" Width="180" Src="@(auction.Images.First().Image.GetImageSource())" />
+                            }
 
                             <MudText Typo="Typo.h6"> @auction.Title </MudText>
-                            <MudText Typo="Typo.subtitle1"> @(auction is BiddingAuction spbia ? $"Highest Bid: {spbia.Bidders.Last().Price} EUR" : auction is BuyAuction spbua ? $"Price: {spbua.MinimumPrice} EUR" : "") </MudText>
+
+                            @if (Auction is BiddingAuction sipbia) {
+                                <MudText Typo="Typo.subtitle1" Class="mb-4">@(sipbia.Bidders != null && sipbia.Bidders.Any() ? $"Last Bet: {sipbia.Bidders.Last().Price} by {sipbia.Bidders.Last().Bidder.Username}" : $"Start with first bet at {sipbia.StartingPrice}")</MudText>
+                            } else if (Auction is BuyAuction sipbua) {
+                                <MudText Typo="Typo.subtitle1" Class="mb-4">Buy Price: @sipbua.MinimumPrice</MudText>
+                            }
                         </MudContainer>
                     }
                 } else {
@@ -94,30 +128,21 @@
     public decimal DecimalValue { get; set; }
 
     protected async override Task OnInitializedAsync() {
-        try {
-            Auction = new BiddingAuction() {
-                    Id = 1,
-                    Seller = new User() { Username = "Max" },
-                    Description = "Cooles Ding",
-                    EndDate = DateTime.Now.AddHours(1),
-                    Bidders = new List<BiddingAuctionBid>(),
-                    DeliveryType = EDeliveryType.DELIVER,
-                    Title = "Beste",
-                    Categories = new List<AuctionCategorie>(),
-                    Images = new List<AuctionImage>(),
-                    StartingPrice = 20,
-                    Step = 2
+        await Load();
+    }
 
-                };
-            //Auction = await _repository.ReadAsync(Convert.ToInt32(AuctionId));
-            //SellerProducts = await _repository.GetSellerProducts(Account);
-            //SimiliarProducts = await _repository.GetSimiliarProducts(Auction);
+    private async Task Load() {
+        try {
+            Auction = await _repository.Get(Convert.ToInt32(AuctionId));
+            SellerProducts = await _repository.GetSellerProducts(Account);
+            SimiliarProducts = await _repository.GetSimiliarProducts(Auction);
 
             HubConnection = new HubConnectionBuilder().WithUrl(_navigationManager.ToAbsoluteUri("/auctionhub")).Build();
 
-            HubConnection.On<BiddingAuctionBid>($"ReceiveBet-{Auction.Id}", (bid) => {
+            HubConnection.On($"ReceiveBet-{AuctionId}", async () => {
                 BiddingAuction biddingAuction = Auction as BiddingAuction;
-                biddingAuction.Bidders.Add(bid);
+                biddingAuction.Bidders = await _repository.GetBids(Auction.Id);
+                if (!(DateTime.Now > Auction.EndDate) && (DateTime.Now < Auction.EndDate.AddMinutes(-5))) { Auction.EndDate = DateTime.Now.AddMinutes(5); }
                 StateHasChanged();
             });
 
@@ -128,14 +153,14 @@
         }
     }
 
-    async Task OnValid() {
-
-    }
-
     public async Task Bet() {
         if (HubConnection == null && Auction == null) return;
         BiddingAuction biddingAuction = Auction as BiddingAuction;
         BiddingAuctionBid bid = new BiddingAuctionBid() { Auction = biddingAuction, Bidder = Account, Price = DecimalValue };
-        await HubConnection.SendAsync("SendBet", bid);
+        if (await _repository.Bet(bid)) await HubConnection.SendAsync("SendBet", Auction.Id);
+    }
+
+    public async Task Buy() {
+
     }
 }

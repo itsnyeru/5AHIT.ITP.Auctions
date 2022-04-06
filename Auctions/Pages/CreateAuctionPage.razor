@@ -1,31 +1,60 @@
 ﻿@page "/auction/create"
 @inject IAuctionRepository _repository
+@inject IUserRepository _userRepository
+@inject NavigationManager _navigationManager
 
-<EditForm Model=Auction OnValidSubmit=OnValid>
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<AuthorizeView>
+    <Authorized Context="AuthContext">
+        @if (Account != null) {
+            if(Auction == null) AuctionType = EAuctionType.BIDDING;
+            
+            <EditForm Model=Auction OnValidSubmit=OnValid style="max-width: 750px; margin: 0 auto;">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
 
-    @if (Auction != null)
-    {
-        <AuctionComponent Auction=Auction />
-    }
-</EditForm>
+                <InputSelect class="dropdown-select" @bind-Value=AuctionType>
+                    @foreach (Enum type in Enum.GetValues(typeof(EAuctionType))) {
+                    <option value=@type>@type</option>
+                    }
+            </InputSelect>
 
+            <AuctionComponent Auction=Auction />
+        </EditForm>
+        }
+    </Authorized>
+    <NotAuthorized>
+        You need to be logged in!
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
+    [CascadingParameter] public User Account { get; set; }
     Auction Auction { get; set; }
 
-    protected async override Task OnInitializedAsync()
-    {
-        Auction = new Auction()
-            {
-                Categories = new List<AuctionCategorie>(),
-                Images = new List<AuctionImage>()
-    };
+    public EAuctionType AuctionType {
+        get => Auction is BiddingAuction ? EAuctionType.BIDDING : EAuctionType.BUY;
+        set {
+            if (value == EAuctionType.BIDDING) Auction = new BiddingAuction() {
+                    Categories = new List<AuctionCategorie>(),
+                    Images = new List<AuctionImage>(),
+                    Seller = Account,
+                    FinalPrice = 0
+                };
+            else Auction = new BuyAuction() {
+                    Categories = new List<AuctionCategorie>(),
+                    Images = new List<AuctionImage>(),
+                    Seller = Account,
+                    FinalPrice = 0
+                };
+            this.StateHasChanged();
+        }
     }
 
-    async Task OnValid()
-    {
+    public enum EAuctionType { BIDDING, BUY }
+
+    async Task OnValid() {
+        Auction.Seller = await _userRepository.GetUserById(Account.Id);
         await _repository.CreateAsync(Auction);
+        _navigationManager.NavigateTo($"./auction/{Auction.Id}", true);
     }
 }

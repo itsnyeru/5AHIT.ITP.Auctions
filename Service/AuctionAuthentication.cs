@@ -9,7 +9,7 @@ namespace Services;
 public class AuctionAuthentication : AuthenticationService<User> {
     IMailService _mailService;
 
-    public AuctionAuthentication(AuctionDbContext dbContext, ILocalStorage storage, IMailService mailService) : base(dbContext, storage) { _mailService = mailService; }
+    public AuctionAuthentication(AuthenticationDbContext dbContext, ILocalStorage storage, IMailService mailService) : base(dbContext, storage) { _mailService = mailService; }
 
     protected async override Task<bool> OnLogin(object obj, User account, string token) {
         User? user = await _dbSet.Include(u => u.Codes).FirstOrDefaultAsync(u => u.Id == account.Id);

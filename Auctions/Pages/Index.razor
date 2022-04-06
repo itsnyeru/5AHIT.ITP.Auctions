@@ -38,9 +38,11 @@
         @foreach (Auction auction in Filtered) {
             <p>@auction.Title</p>
         }
-        <div class="bg-white rounded d-flex align-items-center justify-content-center">
-            <button class="btn btn-hide text-uppercase" type="button"><span>More</span></button>
-        </div>
+        @if (AddResults) {
+            <div class="bg-white rounded d-flex align-items-center justify-content-center">
+                <button class="btn btn-hide text-uppercase" type="button" @onclick=ExecuteAddResults><span>More</span></button>
+            </div>
+        }
     } else {
         <p>No Auctions found!</p>
     }
@@ -53,18 +55,24 @@
 
     private List<Auction> Filtered { get; set; }
 
+    private bool AddResults { get; set; } = true;
+
     protected async override Task OnInitializedAsync() {
+        AddResults = true;
         Search = new SearchObject();
         Search.Categories = (await _repository.GetCategories()).ToDictionary(o => o, o => false);
         await ExecuteSearch();
     }
 
     private async Task ExecuteSearch() {
+        AddResults = true;
         Filtered = await _repository.Filter(Search.Name, Search.Categories.Where(o => o.Value).Select(o => o.Key).ToList(), null);
     }
 
     private async Task ExecuteAddResults() {
+        int filteredCount = Filtered.Count();
         Filtered.AddRange(await _repository.Filter(Search.Name, Search.Categories.Where(o => o.Value).Select(o => o.Key).ToList(), Filtered.Last()));
+        if (Filtered.Count() == filteredCount) AddResults = false;
     }
 
     class SearchObject {

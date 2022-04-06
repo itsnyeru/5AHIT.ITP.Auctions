@@ -104,7 +104,12 @@ namespace Model.Migrations
 
             modelBuilder.Entity("Model.Entity.BiddingAuctionBid", b =>
                 {
-                    b.Property<int>("AUCTION_ID")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    b.Property<int?>("AUCTION_ID")
                         .HasColumnType("int");
 
                     b.Property<int>("BIDDER_ID")
@@ -119,7 +124,9 @@ namespace Model.Migrations
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("PRICE");
 
-                    b.HasKey("AUCTION_ID");
+                    b.HasKey("Id");
+
+                    b.HasIndex("AUCTION_ID");
 
                     b.HasIndex("BIDDER_ID");
 
@@ -392,8 +399,7 @@ namespace Model.Migrations
                     b.HasOne("Model.Entity.BiddingAuction", "Auction")
                         .WithMany("Bidders")
                         .HasForeignKey("AUCTION_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Model.Entity.User", "Bidder")
                         .WithMany("Bids")
